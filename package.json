@@ -1,0 +1,9 @@
+{
+  "name": "mobileapplanding",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-server-livereload": "^1.9.2",
+    "gulp-wait": "0.0.2"
+  }
+}
