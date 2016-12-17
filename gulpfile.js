@@ -19,3 +19,12 @@ gulp.task('style', function () {
 	.pipe(sass().on('error', sass.logError))
 	.pipe(gulp.dest('src/css'));
 });
+
+
+
+
+gulp.task('watch', function () {
+	gulp.watch('app/sass/**/*.sass', ['style']);
+});
+
+gulp.task('default', ['server', 'watch']);
