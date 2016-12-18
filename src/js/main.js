@@ -1,11 +1,14 @@
 (function(){
 
   const promo = document.querySelector('#promo');
-  let windowHeight;
+  const nav = document.querySelector('.nav');
+  let promoHeight;
+  let navHeight;
 
   function resizePromo () {
-    windowHeight = window.innerHeight;
-    promo.style.height = windowHeight + 'px';
+    promoHeight = window.innerHeight;
+    navHeight = nav.clientHeight;
+    promo.style.height = promoHeight - navHeight + 'px';
   }
 
   resizePromo();
