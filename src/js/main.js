@@ -8,7 +8,7 @@
   function resizePromo () {
     promoHeight = window.innerHeight;
     navHeight = nav.clientHeight;
-    promo.style.height = promoHeight - navHeight + 'px';
+    promo.style.height = promoHeight + 'px';
   }
 
   resizePromo();
