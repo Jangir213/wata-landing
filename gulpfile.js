@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var server = require('gulp-server-livereload');
+var wait = require('gulp-wait');
 
 //server
 gulp.task('server', function () {
@@ -24,7 +25,7 @@ gulp.task('style', function () {
 
 
 gulp.task('watch', function () {
-	gulp.watch('app/sass/**/*.sass', ['style']);
+	gulp.watch('src/sass/**/*.sass', ['style']);
 });
 
 gulp.task('default', ['server', 'watch']);

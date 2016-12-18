@@ -1,0 +1,10 @@
+{
+  "name": "watalanding",
+   "dependencies": {
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
+    "materialize": "^0.97.8",
+    "triangles": "^1.0.0",
+    "reset-css": "^2.2.0"
+  }
+}
