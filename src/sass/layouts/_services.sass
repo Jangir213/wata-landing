@@ -9,3 +9,68 @@
 
 .services__description
   @extend %description
+
+.services__items
+  @extend %container
+  display: flex
+
+.services__item
+  width: 25%
+  padding: 0 1em
+
+.service
+  text-align: center
+
+
+.service__line
+  height: 1px
+  background-color: #e0e0e0
+  margin-bottom: 1em
+  transition: background-color .3s ease
+
+.service__title
+  font-size: 1.5em
+  font-weight: 400
+  letter-spacing: 3px
+  line-height: 1.2em
+  text-align: center
+  text-transform: uppercase
+  margin-bottom: 0.75em
+
+.service__description
+  font-weight: 300
+  font-size: 1em
+  color: rgba(0,0,0,.8)
+  margin-bottom: 1em
+
+.service__btn
+  display: inline-block
+  height: 36px
+  line-height: 36px
+  text-transform: uppercase
+  border-radius: 2px
+  padding: 0 1.5em
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)
+  transition: all .3s ease-out
+  &:hover
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15)
+
+.service__ico
+  color: $ico-color
+  font-size: 6em
+  
+.service__ico--brash
+  &:before
+    +ico('\f1fc')
+
+.service__ico--desctop
+  &:before
+    +ico('\f108')
+
+.service__ico--cog
+  &:before
+    +ico('\f013')
+
+.service__ico--code
+  &:before
+    +ico('\f121')
