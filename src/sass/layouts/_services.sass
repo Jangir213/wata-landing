@@ -44,14 +44,10 @@
 
 .service__btn
   @extend %btn
-  display: inline-block  
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)
-  transition: all .3s ease-out
-  &:hover
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15)
+  @extend %btn_hover
 
 .service__ico
-  color: $ico-color
+  color: $color-blue
   font-size: 6em
   
 .service__ico--brash

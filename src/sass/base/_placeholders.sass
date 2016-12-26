@@ -8,8 +8,7 @@
   display: flex
   flex-direction: column
   align-items: center
-  padding-top: 3rem
-  padding-bottom: 3rem
+  padding: 3rem $space-between
 
 %section-underline
   padding-bottom: 0
@@ -32,23 +31,30 @@
   font-weight: 200  
   &:after
     content: ''
-    background-color: $btn-color
+    background-color: $color-light-blue
     width: 100px
     height: 5px
     margin-top: 35px
 
 %description
   width: 65%
-  margin-bottom: 1rem
+  margin-bottom: 2rem
   text-align: center
   line-height: 2.5rem
   font-weight: 300
   font-size: 1.7rem
 
 %btn
+  display: inline-flex
   border-radius: 2px
   height: 36px
   line-height: 36px
   padding: 0 2rem
   text-transform: uppercase
+
+%btn_hover
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)
+  transition: all .3s ease-out
+  &:hover
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15)
   

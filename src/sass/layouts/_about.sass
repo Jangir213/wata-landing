@@ -1,0 +1,116 @@
+.about
+  @extend %section
+  @extend %section-underline
+
+.about__title
+  @extend %title
+
+.about__description
+  @extend %description
+
+.about__persons
+  display: flex
+  flex-wrap: wrap
+
+.about__person
+  width: 50%
+
+.person
+  padding: $space-between
+  position: relative
+  overflow: hidden
+  &:hover
+    .person__bg
+      transform: scale3d(50,50,50)
+    .person__info
+      opacity: 1
+      transition: opacity .5s ease .1s
+
+.person__img
+  width: 100%
+  height: 100%
+
+.person__bg
+  position: absolute
+  top: 50%
+  left: 50%
+  width: 30px
+  height: 30px
+  border-radius: 30px
+  background: rgba(105,240,174,.9)
+  transition: .3s ease-out
+  transform: scale3d(0, 0, 0)
+
+.person__info
+  position: absolute
+  top: 0
+  left: 0 
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  opacity: 0
+
+.person__name
+  font-size: 2.5rem
+  font-weight: 400
+
+.person__proffesion
+  text-transform: uppercase
+  letter-spacing: 4px
+  font-size: 1.5rem
+  margin-bottom: 2rem
+
+.person__contacts
+  display: flex
+  width: 100%
+  justify-content: space-around
+
+.person__social
+  margin: 0 0.25rem
+
+
+// icons
+.person__social--fb
+  &:before
+    +ico('\f09a')
+
+.person__social--bh
+  &:before
+    +ico('\f1b4')
+
+.person__social--dv
+  &:before
+    +ico('\f1bd')
+
+.person__social--gp
+  &:before
+    +ico('\f0d5')
+
+.person__social--vk
+  &:before
+    +ico('\f189')
+
+.person__social--gh
+  &:before
+    +ico('\f09b')
+
+.person__social--bb
+  &:before
+    +ico('\f171')
+
+.person__social--tb
+  &:before
+    +ico('\f173')
+
+.person__social--of
+  &:before
+    +ico('\f16c')
+
+.person__social--pr
+  &:before
+    +ico('\f0d2')
+
+   
