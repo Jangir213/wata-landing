@@ -1,0 +1,46 @@
+.prices
+  @extend %section
+
+.prices__title
+  @extend %title
+
+.prices__description
+  @extend %description
+
+.prices__currency
+  @extend %container
+  
+.currency
+  display: flex
+  justify-content: flex-end
+
+.currency__group
+  display: inline-flex
+  margin-left: .3rem
+
+.currency__inpt
+  position: absolute
+  visibility: hidden
+  &:checked+.currency__lbl:before  
+    border: 2px solid $color-light-blue
+    background-color: $color-light-blue
+  &:not(:checked)+.currency__lbl:before  
+    border: 2px solid #5a5a5a     
+
+ 
+.currency__lbl
+  position: relative
+  padding-left: 25px
+  cursor: pointer
+  &:before
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    margin: 4px
+    width: 16px
+    height: 16px
+    border-radius: 50%
+    transition: .3s ease
+
+
