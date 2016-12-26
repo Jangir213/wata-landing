@@ -1,8 +1,6 @@
 .services
-  @extend %section
-  display: flex
-  flex-direction: column
-  align-items: center
+  @extend %section  
+  @extend %section-underline
 
 .services__title
   @extend %title
@@ -13,6 +11,7 @@
 .services__items
   @extend %container
   display: flex
+  margin-bottom: 1em
 
 .services__item
   width: 25%
@@ -44,12 +43,8 @@
   margin-bottom: 1em
 
 .service__btn
-  display: inline-block
-  height: 36px
-  line-height: 36px
-  text-transform: uppercase
-  border-radius: 2px
-  padding: 0 1.5em
+  @extend %btn
+  display: inline-block  
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)
   transition: all .3s ease-out
   &:hover
