@@ -9,6 +9,7 @@
 
 .prices__currency
   @extend %container
+  margin-bottom: 2rem
   
 .currency
   display: flex
@@ -42,5 +43,59 @@
     height: 16px
     border-radius: 50%
     transition: .3s ease
+
+
+.prices__containers
+  @extend %container
+  display: flex
+  align-items: baseline
+
+.prices__container
+  width: 33.3333%
+
+.container
+  @extend %box-shadow
+  margin: 0 $space-between
+  padding: 4rem 0
+  text-align: center
+  &:hover
+    .container__line
+      background-color: $color-blue
+
+.container--center
+  box-shadow: 0 16px 28px 0 rgba(0,0,0,.22), 0 25px 55px 0 rgba(0,0,0,.21)
+
+.container__title
+  font-size: 1.6rem
+  text-transform: uppercase
+  letter-spacing: 3px
+  margin-bottom: 1rem
+
+.container__line
+  @extend %line
+  margin-bottom: 1rem
+
+.container__price
+  font-size: 4rem
+  font-weight: 200
+  margin-bottom: 1rem
+
+.container__services
+  margin-bottom: 3rem
+
+.container__service
+  font-size: 1.1rem
+  line-height: 2rem
+
+.container__btn
+  @extend %btn
+  @extend %box-shadow
+  @extend %box-shadow_hover
+
+.container__btn--blue
+  background-color: $color-light-blue
+
+// containers
+
 
 

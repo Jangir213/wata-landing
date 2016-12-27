@@ -25,10 +25,8 @@
 
 
 .service__line
-  height: 1px
-  background-color: #e0e0e0
+  @extend %line
   margin-bottom: 1em
-  transition: background-color .3s ease
 
 .service__title
   font-size: 1.5em
@@ -47,7 +45,8 @@
 
 .service__btn
   @extend %btn
-  @extend %btn_hover
+  @extend %box-shadow
+  @extend %box-shadow_hover
 
 .service__ico
   color: $color-blue
