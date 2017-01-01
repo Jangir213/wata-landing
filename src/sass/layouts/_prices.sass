@@ -1,6 +1,10 @@
 .prices
   @extend %section
 
+.prices__in
+  @extend %in
+  @extend %align-center
+
 .prices__title
   @extend %title
 
@@ -8,18 +12,15 @@
   @extend %description
 
 .prices__currency
-  @extend %container
-  margin-bottom: 2rem
+  margin: 0 $space-between 2rem
   
 .currency
+  align-self: flex-end
   display: flex
-  justify-content: flex-end
 
 .currency__group
   display: inline-flex
-  margin-left: .3rem
-  &:last-child
-    margin-right: $space-between
+  margin-left: .3rem  
 
 .currency__inpt
   position: absolute
@@ -48,8 +49,8 @@
 
 
 .prices__containers
-  @extend %container
   display: flex
+  width: 100%
   align-items: baseline
 
 .prices__container
@@ -97,7 +98,7 @@
 .container__btn--blue
   background-color: $color-light-blue
 
-// containers
+
 
 
 

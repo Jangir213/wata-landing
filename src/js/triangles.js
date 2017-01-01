@@ -1685,7 +1685,7 @@ c);e.bind(this.domElement,"transitionend",c);e.bind(this.domElement,"oTransition
   var container = document.getElementById('promo');
   var controls = document.getElementById('controls');
   //var output = document.getElementById('output');
-  var output = document.querySelector('.promo__in');
+  var output = document.querySelector('.promo__triangles');
   var renderer, scene, mesh, geometry, material;
   var webglRenderer, canvasRenderer, svgRenderer;
   var gui;
