@@ -1,0 +1,40 @@
+.posts
+  @extend %section
+  @extend %section-underline
+
+.posts__in
+  @extend %in
+  @extend %align-center
+
+.posts__title
+  @extend %title
+
+.posts__description
+  @extend %description
+
+.posts__items
+  display: flex
+  flex-wrap: wrap
+
+.posts__left-col
+  width: 33.3333%
+  display: flex
+  flex-wrap: wrap
+  .posts__item
+    width: 100%
+
+.posts__right-col
+  width: 66.6666%
+  display: flex
+  flex-wrap: wrap
+  .posts__item
+    width: 50%
+  .posts__item--wide
+    width: 100%
+
+.post
+  padding: $space-between
+
+.post__img
+  width: 100%
+  height: 100%

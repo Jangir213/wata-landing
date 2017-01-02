@@ -37,35 +37,30 @@ html, body {
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.87); }
 
-.services, .works, .started, .about, .prices, .subscribe {
+.services, .works, .started, .about, .prices, .subscribe, .posts {
   padding: 5rem 0.75rem; }
 
-.services:after, .about:after, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in {
+.services:after, .about:after, .posts:after, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in {
   display: flex;
   flex-direction: column;
   align-items: center; }
 
-.services:after, .about:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in {
+.services:after, .about:after, .posts:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in {
   width: 90%;
   max-width: 1700px;
   margin: 0 auto;
   padding: 0 1.5rem; }
 
-/*%container
-  width: 90%
-  max-width: 1700px
-  margin: 0 auto
-  padding: 0 1.5rem*/
-.services, .about {
+.services, .about, .posts {
   padding-bottom: 0; }
-  .services:after, .about:after {
+  .services:after, .about:after, .posts:after {
     content: '';
     padding: 0 1.5rem;
     margin-top: 5rem;
     height: 1px;
     background-color: #e0e0e0; }
 
-.services__title, .works__title, .started__title, .about__title, .prices__title, .subscribe__title {
+.services__title, .works__title, .started__title, .about__title, .prices__title, .subscribe__title, .posts__title {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,14 +70,14 @@ html, body {
   letter-spacing: 5px;
   margin-bottom: 40px;
   font-weight: 200; }
-  .services__title:after, .works__title:after, .started__title:after, .about__title:after, .prices__title:after, .subscribe__title:after {
+  .services__title:after, .works__title:after, .started__title:after, .about__title:after, .prices__title:after, .subscribe__title:after, .posts__title:after {
     content: '';
     background-color: #69f0ae;
     width: 100px;
     height: 5px;
     margin-top: 35px; }
 
-.services__description, .started__description, .about__description, .prices__description, .subscribe__description {
+.services__description, .started__description, .about__description, .prices__description, .subscribe__description, .posts__description {
   width: 65%;
   margin-bottom: 2rem;
   text-align: center;
@@ -555,3 +550,30 @@ a {
     content: "";
     font-size: 1.6rem;
     margin-right: 15px; }
+
+.posts__items {
+  display: flex;
+  flex-wrap: wrap; }
+
+.posts__left-col {
+  width: 33.3333%;
+  display: flex;
+  flex-wrap: wrap; }
+  .posts__left-col .posts__item {
+    width: 100%; }
+
+.posts__right-col {
+  width: 66.6666%;
+  display: flex;
+  flex-wrap: wrap; }
+  .posts__right-col .posts__item {
+    width: 50%; }
+  .posts__right-col .posts__item--wide {
+    width: 100%; }
+
+.post {
+  padding: 0.75rem; }
+
+.post__img {
+  width: 100%;
+  height: 100%; }
