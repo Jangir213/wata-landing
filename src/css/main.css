@@ -97,6 +97,9 @@ html, body {
 .service__btn, .started__btn, .container, .container__btn, .subscribe__btn {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
+.container--center, .post__link:hover {
+  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21); }
+
 .service__btn, .started__btn, .container__btn, .subscribe__btn {
   transition: all .3s ease-out; }
   .service__btn:hover, .started__btn:hover, .container__btn:hover, .subscribe__btn:hover {
@@ -106,6 +109,21 @@ html, body {
   height: 1px;
   background-color: #e0e0e0;
   transition: background-color .3s ease; }
+
+.promo__btn, .post__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  color: #1a237e;
+  font-size: 2em;
+  border-radius: 50%;
+  background-color: #69f0ae; }
+  .promo__btn:hover, .post__btn:hover {
+    cursor: pointer;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 
 *, *:after, *:before {
   box-sizing: border-box; }
@@ -180,22 +198,9 @@ a {
   text-align: center; }
 
 .promo__btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
   bottom: 15px;
   left: 50%;
-  margin-left: -27.5px;
-  width: 55px;
-  height: 55px;
-  color: #1a237e;
-  font-size: 2em;
-  border-radius: 50%;
-  background-color: #69f0ae; }
-  .promo__btn:hover {
-    cursor: pointer;
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+  margin-left: -27.5px; }
   .promo__btn:after {
     font-family: 'FontAwesome';
     font-style: normal;
@@ -479,9 +484,6 @@ a {
   .container:hover .container__line {
     background-color: #1a237e; }
 
-.container--center {
-  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21); }
-
 .container__title {
   font-size: 1.6rem;
   text-transform: uppercase;
@@ -574,6 +576,27 @@ a {
 .post {
   padding: 0.75rem; }
 
+.post__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  overflow: hidden; }
+  .post__link:hover .post__btn {
+    transform: translateY(0); }
+
 .post__img {
   width: 100%;
   height: 100%; }
+
+.post__btn {
+  bottom: 10px;
+  right: 10px;
+  transform: translateY(200px);
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1); }
+  .post__btn:after {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: normal;
+    content: ""; }

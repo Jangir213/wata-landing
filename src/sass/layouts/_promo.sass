@@ -26,21 +26,9 @@
   text-align: center
 
 .promo__btn
-  display: flex
-  justify-content: center
-  align-items: center
-  position: absolute
+  @extend %round-btn
   bottom: 15px
   left: 50%
-  margin-left: -27.5px
-  width: 55px
-  height: 55px
-  color: $color-blue
-  font-size: 2em
-  border-radius: 50%
-  background-color: $color-light-blue
-  &:hover
-    cursor: pointer
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18) , 0 4px 15px 0 rgba(0,0,0,.15)
+  margin-left: -27.5px 
   &:after
     +ico('\f103')
