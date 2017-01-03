@@ -169,7 +169,6 @@
     </div>
   </section>
 
-
   <!--about-->
   <section class="about">
 
@@ -385,14 +384,15 @@
 
       <form action="#" class="subscribe__form">
 
-        <label for="sub-mail" class="subscribe__lbl">Your email</label>
-        <input type="email" class="subscribe__input" id="sub-mail" required>
-        <a href="" class="subscribe__btn">Subscribe</a>
+        <div class="subscribe__group">
+          <label for="sub-mail" class="subscribe__lbl">Your email</label>
+          <input type="email" class="subscribe__input" id="sub-mail" required>
+        </div>
 
+        <a href="" class="subscribe__btn">Subscribe</a>
       </form>
     </div>
   </section>
-
 
   <!--posts-->
   <section class="posts">
@@ -464,6 +464,44 @@
     </div>
 
   </section>
+
+  <!--contact-->
+  <section class="contact">
+    <div class="contact__in">
+      <h2 class="contact__title">
+        Contact us
+      </h2>
+      <p class="contact__description">
+        Let us know if you want to work on your project with us or just drop a line to say hello. We're always glad to receive your
+        messages.
+      </p>
+
+      <form action="#" class="contact__form">
+        <div class="contact__group contact__group--half">
+          <label for="con-name" class="contact__lbl">Name</label>
+          <input type="text" class="contact__input" id="con-mail" required>
+        </div>
+
+        <div class="contact__group contact__group--half">
+          <label for="con-surname" class="contact__lbl contact__lbl--active">Surname</label>
+          <input type="text" class="contact__input" id="con-surname" required>
+        </div>
+
+        <div class="contact__group">
+          <label for="con-mail" class="contact__lbl">Email</label>
+          <input type="email" class="contact__input" id="con-mail" required>
+        </div>
+
+        <div class="contact__group">
+          <label for="con-msg" class="contact__lbl contact__lbl--msg">Message</label>
+          <textarea type="email" class="contact__input contact__input--msg" id="con-msg" required></textarea>
+        </div>
+
+        <a href="#" class="contact__btn">Send</a>
+      </form>
+    </div>
+  </section>
+
 
   <!--scripts-->
   <!--<script src="bower/jquery/dist/jquery.min.js"></script>-->

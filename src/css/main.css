@@ -37,30 +37,30 @@ html, body {
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.87); }
 
-.services, .works, .started, .about, .prices, .subscribe, .posts {
+.services, .works, .started, .about, .prices, .subscribe, .posts, .contact {
   padding: 5rem 0.75rem; }
 
-.services:after, .about:after, .posts:after, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in {
+.services:after, .about:after, .posts:after, .contact:after, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in {
   display: flex;
   flex-direction: column;
   align-items: center; }
 
-.services:after, .about:after, .posts:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in {
+.services:after, .about:after, .posts:after, .contact:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in {
   width: 90%;
   max-width: 1700px;
   margin: 0 auto;
   padding: 0 1.5rem; }
 
-.services, .about, .posts {
+.services, .about, .posts, .contact {
   padding-bottom: 0; }
-  .services:after, .about:after, .posts:after {
+  .services:after, .about:after, .posts:after, .contact:after {
     content: '';
     padding: 0 1.5rem;
     margin-top: 5rem;
     height: 1px;
     background-color: #e0e0e0; }
 
-.services__title, .works__title, .started__title, .about__title, .prices__title, .subscribe__title, .posts__title {
+.services__title, .works__title, .started__title, .about__title, .prices__title, .subscribe__title, .posts__title, .contact__title {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,14 +70,14 @@ html, body {
   letter-spacing: 5px;
   margin-bottom: 40px;
   font-weight: 200; }
-  .services__title:after, .works__title:after, .started__title:after, .about__title:after, .prices__title:after, .subscribe__title:after, .posts__title:after {
+  .services__title:after, .works__title:after, .started__title:after, .about__title:after, .prices__title:after, .subscribe__title:after, .posts__title:after, .contact__title:after {
     content: '';
     background-color: #69f0ae;
     width: 100px;
     height: 5px;
     margin-top: 35px; }
 
-.services__description, .started__description, .about__description, .prices__description, .subscribe__description, .posts__description {
+.services__description, .started__description, .about__description, .prices__description, .subscribe__description, .posts__description, .contact__description {
   width: 65%;
   margin-bottom: 2rem;
   text-align: center;
@@ -85,7 +85,7 @@ html, body {
   font-weight: 300;
   font-size: 1.7rem; }
 
-.service__btn, .filter__btn, .started__btn, .container__btn, .subscribe__btn {
+.contact__btn, .service__btn, .filter__btn, .started__btn, .container__btn, .subscribe__btn {
   display: inline-flex;
   align-items: center;
   border-radius: 2px;
@@ -94,15 +94,19 @@ html, body {
   padding: 0 2rem;
   text-transform: uppercase; }
 
-.service__btn, .started__btn, .container, .container__btn, .subscribe__btn {
+.contact__btn {
+  height: 56px;
+  line-height: 56px; }
+
+.service__btn, .started__btn, .container, .container__btn, .subscribe__btn, .contact__btn {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
 .container--center, .post__link:hover {
   box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21); }
 
-.service__btn, .started__btn, .container__btn, .subscribe__btn {
+.service__btn, .started__btn, .container__btn, .subscribe__btn, .contact__btn {
   transition: all .3s ease-out; }
-  .service__btn:hover, .started__btn:hover, .container__btn:hover, .subscribe__btn:hover {
+  .service__btn:hover, .started__btn:hover, .container__btn:hover, .subscribe__btn:hover, .contact__btn:hover {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 
 .service__line, .container__line {
@@ -124,6 +128,42 @@ html, body {
   .promo__btn:hover, .post__btn:hover {
     cursor: pointer;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+
+.subscribe__form, .contact__form {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.subscribe__group, .contact__group {
+  position: relative;
+  padding: 0 0.75rem;
+  width: 100%; }
+
+.subscribe__lbl, .contact__lbl {
+  position: absolute;
+  color: #9e9e9e;
+  top: .8rem;
+  left: .75rem;
+  cursor: text;
+  transition: .2s ease-out; }
+
+.subscribe__lbl--active, .contact__lbl--active {
+  font-size: .8rem;
+  transform: translateY(-140%); }
+
+.subscribe__input, .contact__input {
+  font-size: 1rem;
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  margin-bottom: 2rem; }
+  .subscribe__input:focus, .contact__input:focus {
+    border-bottom: 1px solid #69f0ae;
+    box-shadow: 0 1px 0 0 #69f0ae; }
 
 *, *:after, *:before {
   box-sizing: border-box; }
@@ -511,36 +551,6 @@ a {
 .subscribe {
   background-color: #f2f2f2; }
 
-.subscribe__form {
-  width: 70%;
-  text-align: center;
-  position: relative; }
-
-.subscribe__lbl {
-  position: absolute;
-  color: #9e9e9e;
-  top: .8rem;
-  left: .75rem;
-  cursor: text;
-  transition: .2s ease-out; }
-
-.subscribe__lbl--active {
-  font-size: .8rem;
-  transform: translateY(140%); }
-
-.subscribe__input {
-  width: 100%;
-  height: 3rem;
-  font-size: 1rem;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #9e9e9e;
-  margin-bottom: 2rem; }
-  .subscribe__input:focus {
-    border-bottom: 1px solid #69f0ae;
-    box-shadow: 0 1px 0 0 #69f0ae; }
-
 .subscribe__btn {
   background-color: #69f0ae;
   color: #1a237e;
@@ -600,3 +610,16 @@ a {
     font-style: normal;
     font-weight: normal;
     content: ""; }
+
+.contact__group--half {
+  width: 50%; }
+
+.contact__input--msg {
+  resize: none;
+  box-sizing: content-box;
+  height: 6rem;
+  margin-top: 0.8rem; }
+
+.contact__btn {
+  background-color: #69f0ae;
+  color: #1a237e; }
