@@ -6,6 +6,10 @@
   @extend %in
   @extend %align-center
 
+.contact__in--row
+  flex-direction: row
+  align-items: stretch
+
 .contact__title
   @extend %title
 
@@ -47,5 +51,24 @@
 .contact__map
   width: 100%
   height: 550px
-  margin-bottom: 1rem
+  margin-bottom: 2rem
   padding: 0 $space-between
+  
+.contact__col
+  width: 33.3333%
+  padding: 0 $space-between
+  display: flex
+  flex-direction: column
+  &:hover
+    .contact__line
+      background-color: $color-blue
+
+.contact__info
+  text-transform: uppercase
+  letter-spacing: 4px
+  font-size: 1.6rem
+  margin-bottom: 0.5rem
+
+.contact__line
+  @extend %line
+  margin-bottom: 1rem
