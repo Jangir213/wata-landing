@@ -40,20 +40,20 @@ html, body {
 .services, .works, .started, .about, .prices, .subscribe, .posts, .contact {
   padding: 5rem 0.75rem; }
 
-.services:after, .about:after, .posts:after, .contact:after, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in {
+.services:after, .about:after, .posts:after, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in {
   display: flex;
   flex-direction: column;
   align-items: center; }
 
-.services:after, .about:after, .posts:after, .contact:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in {
+.services:after, .about:after, .posts:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in, .footer__in {
   width: 90%;
   max-width: 1700px;
   margin: 0 auto;
   padding: 0 1.5rem; }
 
-.services, .about, .posts, .contact {
+.services, .about, .posts {
   padding-bottom: 0; }
-  .services:after, .about:after, .posts:after, .contact:after {
+  .services:after, .about:after, .posts:after {
     content: '';
     padding: 0 1.5rem;
     margin-top: 5rem;
@@ -653,3 +653,67 @@ a {
 
 .contact__line {
   margin-bottom: 1rem; }
+
+.contact__detail:before {
+  margin-right: 0.3rem; }
+
+.contact__detail--sk:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }
+
+.contact__detail--ws:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }
+
+.contact__detail--wc:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }
+
+.footer {
+  background-color: #f2f2f2;
+  padding: 1rem 0.75rem; }
+
+.footer__in {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.footer__social {
+  margin: 0 0.2rem;
+  color: #1a237e; }
+
+.footer__social--fb:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }
+
+.footer__social--vk:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }
+
+.footer__social--gp:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }
+
+.footer__social--gh:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }
+
+.footer__social--dv:before {
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  content: ""; }

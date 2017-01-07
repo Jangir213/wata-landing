@@ -1,6 +1,5 @@
 .contact
   @extend %section  
-  @extend %section-underline
 
 .contact__in 
   @extend %in
@@ -72,3 +71,19 @@
 .contact__line
   @extend %line
   margin-bottom: 1rem
+
+.contact__detail
+  &:before
+    margin-right: 0.3rem
+
+.contact__detail--sk
+  &:before
+    +ico('\f17e')
+
+.contact__detail--ws
+  &:before
+    +ico('\f232')
+
+.contact__detail--wc
+  &:before
+    +ico('\f1d7')    

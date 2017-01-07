@@ -1,0 +1,35 @@
+.footer
+  background-color: $color-grey
+  padding: 1rem $space-between
+
+.footer__in
+  @extend %in
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+
+.footer__social
+  margin: 0 0.2rem
+  color: $color-blue
+
+
+.footer__social--fb
+  &:before
+    +ico('\f09a')
+
+.footer__social--vk
+  &:before
+    +ico('\f189')
+
+.footer__social--gp
+  &:before
+    +ico('\f0d5')
+
+.footer__social--gh
+  &:before
+    +ico('\f09b')
+
+.footer__social--dv
+  &:before
+    +ico('\f1bd')
