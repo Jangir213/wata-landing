@@ -1,6 +1,6 @@
 (function () {
 
-  (function mainWindow() {
+  (function () {
     const promo = document.querySelector('#promo');
     const nav = document.querySelector('.nav');
     let promoHeight;
@@ -16,12 +16,14 @@
     window.addEventListener('resize', resizePromo);
   })();
 
-
+  
   window.addEventListener('load', () => {
     imgHeight();
     changePrices();
+    focusInput();
   });
 
+  
   function imgHeight() {
     const wideImg = document.querySelector('.posts__item--wide');
     function resizeImg() {
@@ -36,25 +38,21 @@
     window.addEventListener('resize', resizeImg);
   };
 
+  
   function changePrices() {
-    let prices = {
+    const prices = {
       standard: { usd: '$19', eur: '€17' },
       professional: { usd: '$49', eur: '€43' },
       extend: { usd: '$99', eur: '€87' }
     }
-
     const keys = Object.keys(prices);
 
-    const currency = document.querySelector('.currency');
     const dolBtn = document.querySelector('#dol');
     const eurBtn = document.querySelector('#eur');
-    //let prices = document.querySelectorAll('.container__price');
-
     dolBtn.addEventListener('change', change);
     eurBtn.addEventListener('change', change);
 
     function change() {
-      console.log('++');
       for (let i = 0; i < keys.length; i++) {
         const price = document.querySelector(`.container--${keys[i]} .container__price`);
         price.innerHTML = ~price.innerHTML.indexOf('$') ?
@@ -62,8 +60,30 @@
           prices[keys[i]].usd;
       }
     }
-
   }
+
+  
+  function focusInput() {
+    const lbls = document.querySelectorAll('.lbl');
+
+    for (let i = 0; i < lbls.length; i++) {
+      const inpt = lbls[i].nextElementSibling;
+      inpt.addEventListener('focus', () => { focus(lbls[i]) });
+      inpt.addEventListener('blur', () => { blur(lbls[i], inpt) });
+    }
+
+    function focus(lbl) {
+      const lblClasses = lbl.classList;
+      lblClasses.add('lbl--active');
+    }
+
+    function blur(lbl, inpt) {
+      const lblClasses = lbl.classList;
+      if (!inpt.value)
+        lblClasses.remove('lbl--active');
+    }
+  }
+
 
 
 })();

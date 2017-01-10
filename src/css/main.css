@@ -148,7 +148,7 @@ html, body {
   cursor: text;
   transition: .2s ease-out; }
 
-.subscribe__lbl--active, .contact__lbl--active {
+.lbl--active, .subscribe__lbl--active, .contact__lbl--active {
   font-size: .8rem;
   transform: translateY(-140%); }
 
