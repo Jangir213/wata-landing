@@ -92,7 +92,8 @@ html, body {
   height: 36px;
   line-height: 36px;
   padding: 0 2rem;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  cursor: pointer; }
 
 .contact__btn {
   height: 56px;
@@ -169,6 +170,7 @@ html, body {
   box-sizing: border-box; }
 
 a {
+  cursor: pointer;
   text-decoration: none;
   color: inherit; }
 
@@ -193,7 +195,7 @@ a {
 @keyframes ripple {
   100% {
     opacity: 0;
-    transform: scale(10); } }
+    transform: scale(3); } }
 
 .nav {
   position: fixed;
@@ -345,14 +347,18 @@ a {
 
 .works__items {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap; }
 
 .works__item {
   width: 33.333%; }
 
 .work {
-  padding: 0.75rem; }
+  padding: 0.75rem;
+  transform: scale3d(1, 1, 1);
+  transition: .2s; }
+
+.work--hidden {
+  transform: scale3d(0, 0, 1); }
 
 .work__img {
   width: 100%; }

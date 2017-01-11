@@ -28,6 +28,10 @@
 
   function imgHeight() {
     const wideImg = document.querySelector('.posts__item--wide');
+
+    window.addEventListener('resize', resizeImg);
+    resizeImg();
+
     function resizeImg() {
       const smallImg = document.querySelector('.posts__left-col .posts__item img');
       const heightSmallImg = parseFloat(getComputedStyle(smallImg).height);
@@ -36,8 +40,6 @@
       const height = heightSmallImg * 2 + pdBotDiv * 4;
       wideImg.style.height = height + 'px';
     }
-    resizeImg();
-    window.addEventListener('resize', resizeImg);
   };
 
 
@@ -75,14 +77,12 @@
     }
 
     function focus(lbl) {
-      const lblClasses = lbl.classList;
-      lblClasses.add('lbl--active');
+      lbl.classList.add('lbl--active');
     }
 
     function blur(lbl, inpt) {
-      const lblClasses = lbl.classList;
       if (!inpt.value)
-        lblClasses.remove('lbl--active');
+        lbl.classList.remove('lbl--active');
     }
   }
 
@@ -92,17 +92,43 @@
     const works = document.querySelectorAll('.work');
 
     for (let i = 0; i < btns.length; i++) {
-      btns[i].addEventListener('click', () => { changeBtn(btns[i]) });
-
+      btns[i].addEventListener('click', () => {
+        changeBtn(btns[i]);
+        hiddenWorks(btns[i]);
+      });
     }
 
     function changeBtn(btn) {
-      for (let i = 0; i < btns.length; i++) {
-        const btnClasses = btns[i].classList;
-        btnClasses.remove('filter__btn--active');
+      for (let i = 0; i < btns.length; i++)
+        btns[i].classList.remove('filter__btn--active');
+      btn.classList.add('filter__btn--active');
+    }
+
+    function hiddenWorks(btn) {
+      const filter = btn.dataset.group;
+
+      if (filter == 'all') {
+        showAllWorks();
+        return;
       }
 
-      btn.classList.add('filter__btn--active');
+      for (let i = 0; i < works.length; i++) {
+        const workGroups = works[i].dataset.groups;
+        if (!~workGroups.indexOf(filter)) {         
+          works[i].classList.add('work--hidden');
+          setTimeout(() => { works[i].style.display = 'none' }, 150);
+        } else {
+          works[i].classList.remove('work--hidden');
+          setTimeout(() => { works[i].style.display = '' }, 150);
+        }
+      }
+    }
+
+    function showAllWorks() {
+      for (let i = 0; i < works.length; i++) {
+        works[i].classList.remove('work--hidden');
+        setTimeout(() => { works[i].style.display = '' }, 150);
+      }
     }
   }
 
@@ -113,25 +139,23 @@
     innerElement.className = 'link__inner';
 
     for (let i = 0; i < links.length; i++) {
-      links[i].addEventListener('click', (e) => { click(links[i], innerElement, e) });    
+      links[i].addEventListener('click', (e) => { click(links[i], innerElement, e) });
     }
 
     function click(el, inEl, e) {
       el.appendChild(inEl);
 
-      const inner = el.querySelector('.link__inner');
       const max = Math.max(el.clientHeight, el.clientWidth);
       const x = e.pageX - el.offsetLeft - (max / 2);
       const y = e.pageY - el.offsetTop - (max / 2);
-
+      const inner = el.querySelector('.link__inner');
       inner.style.height = max + 'px';
-      inner.style.width = max + 'px';      
+      inner.style.width = max + 'px';
       inner.style.left = x + 'px';
       inner.style.top = y + 'px';
-
       inner.classList.add('link__inner--animate');
 
-      setTimeout(() => {el.removeChild(inEl);}, 700);
+      setTimeout(() => { el.removeChild(inEl); }, 700);
     }
   }
 

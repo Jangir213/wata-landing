@@ -25,7 +25,6 @@
 
 .works__items
   display: flex
-  justify-content: space-around
   flex-wrap: wrap
 
 .works__item
@@ -33,6 +32,11 @@
 
 .work
   padding: $space-between
+  transform: scale3d(1, 1, 1)
+  transition: .2s
+
+.work--hidden
+  transform: scale3d(0, 0, 1)
 
 .work__img
   width: 100%
