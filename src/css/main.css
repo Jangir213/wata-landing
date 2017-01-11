@@ -172,6 +172,29 @@ a {
   text-decoration: none;
   color: inherit; }
 
+.link {
+  overflow: hidden;
+  position: relative; }
+
+.link__inner {
+  display: block;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  transform: scale(0);
+  transition-property: transform, opacity;
+  transition-duration: .7s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 1; }
+
+.link__inner--animate {
+  animation: ripple 0.7s linear; }
+
+@keyframes ripple {
+  100% {
+    opacity: 0;
+    transform: scale(10); } }
+
 .nav {
   position: fixed;
   top: 0;
@@ -312,7 +335,10 @@ a {
 .filter__btn {
   color: #1a237e;
   display: inline-block;
-  cursor: pointer; }
+  cursor: pointer;
+  will-change: opacity, transform;
+  overflow: hidden;
+  transition: background-color .2s linear .3s; }
 
 .filter__btn--active {
   background-color: #69f0ae; }

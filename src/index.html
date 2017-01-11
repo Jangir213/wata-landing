@@ -7,11 +7,8 @@
 
   <link rel="stylesheet" href="bower/reset-css/reset.css">
   <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
-  <!--<link rel="stylesheet" href="bower/materialize/dist/css/materialize.min.css">-->
 
   <link rel="stylesheet" href="css/main.css">
-
-
 </head>
 
 <body>
@@ -108,42 +105,40 @@
   <section class="works">
 
     <div class="works__in">
-
       <h2 class="works__title">
         Our works
       </h2>
 
       <ul class="works__filter filter">
-        <li class="filter__btn filter__btn--active">Everything</li>
-        <li class="filter__btn">Material</li>
-        <li class="filter__btn">Food</li>
-        <li class="filter__btn">Digital</li>
+        <li class="filter__btn link filter__btn--active" data-group="all">Everything</li>
+        <li class="filter__btn link" data-group="material">Material</li>
+        <li class="filter__btn link" data-group="food">Food</li>
+        <li class="filter__btn link" data-group="digital">Digital</li>
       </ul>
-
     </div>
 
     <div class="works__items">
-      <a href="#" class="works__item work">
+      <a href="#" class="works__item work" data-groups='["food"]'>
         <img src="images/works/ice-cream.png" alt="clock" class="work__img">
         <h4 class="work__title">Heisenberg ice-cream</h4>
       </a>
-      <a href="#" class="works__item work">
+      <a href="#" class="works__item work" data-groups='["material"]'>
         <img src="images/works/books.png" alt="clock" class="work__img">
         <h4 class="work__title">A. Joe book cover</h4>
       </a>
-      <a href="#" class="works__item work">
+      <a href="#" class="works__item work" data-groups='["digital"]'>
         <img src="images/works/clock.png" alt="clock" class="work__img">
         <h4 class="work__title">Wooden series</h4>
       </a>
-      <a href="#" class="works__item work">
+      <a href="#" class="works__item work" data-groups='["digital", "material"]'>
         <img src="images/works/rubiks.png" alt="clock" class="work__img">
         <h4 class="work__title">Rubik's triangle</h4>
       </a>
-      <a href="#" class="works__item work">
+      <a href="#" class="works__item work" data-groups='["material"]'>
         <img src="images/works/tape.png" alt="clock" class="work__img">
         <h4 class="work__title">Old fashioned</h4>
       </a>
-      <a href="#" class="works__item work">
+      <a href="#" class="works__item work" data-groups='["food", "material"]'>
         <img src="images/works/trees.png" alt="clock" class="work__img">
         <h4 class="work__title">Parks and recreation</h4>
       </a>
@@ -301,13 +296,13 @@
         <span class="currency__description">Choose your currency:</span>
 
         <div class="currency__group">
-        <input type="radio" name="currency" class="currency__inpt" id="dol" checked>
-        <label for="dol" class="currency__lbl">$</label>
+          <input type="radio" name="currency" class="currency__inpt" id="dol" checked>
+          <label for="dol" class="currency__lbl">$</label>
         </div>
 
         <div class="currency__group">
-        <input type="radio" name="currency" class="currency__inpt" id="eur">
-        <label for="eur" class="currency__lbl">€</label>
+          <input type="radio" name="currency" class="currency__inpt" id="eur">
+          <label for="eur" class="currency__lbl">€</label>
         </div>
       </div>
 
@@ -546,7 +541,6 @@
 
 
   <!--scripts-->
-  <!--<script src="bower/jquery/dist/jquery.min.js"></script>-->
   <script src="js/main.js"></script>
   <script src="js/triangles.js"></script>
 

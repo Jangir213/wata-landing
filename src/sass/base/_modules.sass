@@ -1,2 +1,25 @@
 .lbl--active
   @extend %input-lbl-active
+
+.link
+  overflow: hidden
+  position: relative
+
+.link__inner
+  display: block
+  position: absolute
+  background: rgba(0, 0, 0, 0.2)
+  border-radius: 100%
+  transform: scale(0)
+  transition-property: transform, opacity
+  transition-duration: .7s 
+  transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940)
+  opacity: 1
+
+.link__inner--animate
+  animation: ripple 0.7s linear
+
+@keyframes ripple 
+	100% 
+    opacity: 0
+    transform: scale(10)
