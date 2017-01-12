@@ -18,6 +18,8 @@
 
 
   window.addEventListener('load', () => {
+    $('.scrollspy').scrollSpy({scrollOffset:64});
+
     imgHeight();
     changePrices();
     focusInput();

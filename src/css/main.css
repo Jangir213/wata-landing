@@ -226,6 +226,9 @@ a {
   transition: .3s; }
   .nav__item:hover {
     background-color: rgba(0, 0, 0, 0.1); }
+  .nav__item .active {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 4px solid #69f0ae; }
 
 .nav__link {
   display: block;
@@ -235,10 +238,9 @@ a {
   padding: 0 15px;
   font-weight: 400; }
 
-.nav__link--active {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-bottom: 4px solid #69f0ae; }
-
+/*.nav__link--active
+  background-color: rgba(0,0,0,.1)
+  border-bottom: 4px solid $color-light-blue*/
 .promo:before {
   content: '';
   display: block;
