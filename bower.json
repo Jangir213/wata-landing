@@ -5,6 +5,7 @@
     "jquery": "^3.1.1",
     "materialize": "^0.97.8",
     "triangles": "^1.0.0",
-    "reset-css": "^2.2.0"
+    "reset-css": "^2.2.0",
+    "scrollmagic": "^2.0.5"
   }
 }

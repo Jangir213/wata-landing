@@ -3,3 +3,7 @@
 	font-style: normal
 	font-weight: normal
 	content: $content
+
+=mq($width, $type: max)
+	@media screen and (#{$type}-width: $width)
+		@content

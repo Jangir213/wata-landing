@@ -15,8 +15,12 @@
   margin: 0 $space-between 2rem
   
 .currency
-  align-self: flex-end
   display: flex
+  align-self: flex-end
+  align-items: center 
+
+.currency__description
+  display: inline-flex
 
 .currency__group
   display: inline-flex
@@ -29,8 +33,7 @@
     border: 2px solid $color-light-blue
     background-color: $color-light-blue
   &:not(:checked)+.currency__lbl:before  
-    border: 2px solid #5a5a5a     
-
+    border: 2px solid #5a5a5a    
  
 .currency__lbl
   position: relative
@@ -46,7 +49,6 @@
     height: 16px
     border-radius: 50%
     transition: .3s ease
-
 
 .prices__containers
   display: flex

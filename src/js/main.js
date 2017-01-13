@@ -18,7 +18,7 @@
 
 
   window.addEventListener('load', () => {
-    $('.scrollspy').scrollSpy({scrollOffset:64});
+    $('.scrollspy').scrollSpy({ scrollOffset: 64 });
 
     imgHeight();
     changePrices();
@@ -116,7 +116,7 @@
 
       for (let i = 0; i < works.length; i++) {
         const workGroups = works[i].dataset.groups;
-        if (!~workGroups.indexOf(filter)) {         
+        if (!~workGroups.indexOf(filter)) {
           works[i].classList.add('work--hidden');
           setTimeout(() => { works[i].style.display = 'none' }, 150);
         } else {
@@ -157,7 +157,10 @@
       inner.style.top = y + 'px';
       inner.classList.add('link__inner--animate');
 
-      setTimeout(() => { el.removeChild(inEl); }, 700);
+      setTimeout(() => {
+        if (el.contains(inEl))
+          el.removeChild(inEl);
+      }, 700);
     }
   }
 
