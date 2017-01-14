@@ -43,6 +43,9 @@
   max-width: 1700px;
   margin: 0 auto;
   padding: 0 1.5rem; }
+  @media screen and (max-width: 768px) {
+    .services:after, .about:after, .posts:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in, .footer__in {
+      width: 100%; } }
 
 .services, .about, .posts {
   padding-bottom: 0; }
@@ -77,6 +80,9 @@
   line-height: 2.5rem;
   font-weight: 300;
   font-size: 1.7rem; }
+  @media screen and (max-width: 1024px) {
+    .services__description, .started__description, .about__description, .prices__description, .subscribe__description, .posts__description, .contact__description {
+      width: 85%; } }
 
 .contact__btn, .service__btn, .filter__btn, .started__btn, .container__btn, .subscribe__btn {
   display: inline-flex;
@@ -128,6 +134,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center; }
+  @media screen and (max-width: 768px) {
+    .subscribe__form, .contact__form {
+      width: 90%; } }
 
 .subscribe__group, .contact__group {
   position: relative;
@@ -279,11 +288,15 @@ a {
 
 .services__items {
   display: flex;
-  margin-bottom: 1em; }
+  flex-wrap: wrap;
+  margin-bottom: 1rem; }
 
 .services__item {
   width: 25%;
-  padding: 0 1em; }
+  padding: 0 1rem; }
+  @media screen and (max-width: 768px) {
+    .services__item {
+      width: 50%; } }
 
 .service {
   text-align: center; }
@@ -291,10 +304,10 @@ a {
     background-color: #1a237e; }
 
 .service__line {
-  margin-bottom: 1em; }
+  margin-bottom: 1rem; }
 
 .service__title {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 3px;
   line-height: 1.2em;
@@ -304,9 +317,12 @@ a {
 
 .service__description {
   font-weight: 300;
-  font-size: 1em;
+  font-size: 1rem;
   color: rgba(0, 0, 0, 0.8);
-  margin-bottom: 1em; }
+  margin-bottom: 1rem; }
+
+.service__btn {
+  margin-bottom: 1rem; }
 
 .service__ico {
   color: #1a237e;
@@ -358,6 +374,9 @@ a {
 
 .works__item {
   width: 33.333%; }
+  @media screen and (max-width: 768px) {
+    .works__item {
+      width: 50%; } }
 
 .work {
   padding: 0.75rem;
@@ -427,12 +446,14 @@ a {
   position: absolute;
   top: 0;
   left: 0;
+  padding: 1rem;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   opacity: 0; }
 
 .person__name {
@@ -444,11 +465,19 @@ a {
   letter-spacing: 4px;
   font-size: 1.5rem;
   margin-bottom: 2rem; }
+  @media screen and (max-width: 768px) {
+    .person__proffesion {
+      margin-bottom: 1rem; } }
 
 .person__contacts {
   display: flex;
   width: 100%;
   justify-content: space-around; }
+  @media screen and (max-width: 768px) {
+    .person__contacts {
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: wrap; } }
 
 .person__social {
   margin: 0 0.25rem; }
@@ -520,6 +549,9 @@ a {
   display: flex;
   align-self: flex-end;
   align-items: center; }
+  @media screen and (max-width: 768px) {
+    .currency {
+      align-self: center; } }
 
 .currency__description {
   display: inline-flex; }
@@ -556,12 +588,24 @@ a {
   display: flex;
   width: 100%;
   align-items: baseline; }
+  @media screen and (max-width: 768px) {
+    .prices__containers {
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center; } }
 
 .prices__container {
-  width: 33.3333%; }
+  width: 33.3333%;
+  margin: 0 0.75rem; }
+  @media screen and (max-width: 768px) {
+    .prices__container {
+      width: 60%;
+      min-width: 300px;
+      margin-bottom: 4rem; }
+      .prices__container:last-child {
+        margin-bottom: 0; } }
 
 .container {
-  margin: 0 0.75rem;
   padding: 4rem 0;
   text-align: center; }
   .container:hover .container__line {
@@ -654,8 +698,13 @@ a {
     font-weight: normal;
     content: ""; }
 
+@media screen and (max-width: 768px) {
+  .contact {
+    padding-bottom: 0; } }
+
 .contact__in--row {
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: stretch; }
 
 .contact__form {
@@ -687,6 +736,10 @@ a {
   flex-direction: column; }
   .contact__col:hover .contact__line {
     background-color: #1a237e; }
+  @media screen and (max-width: 768px) {
+    .contact__col {
+      width: 100%;
+      margin-bottom: 2rem; } }
 
 .contact__info {
   text-transform: uppercase;

@@ -18,6 +18,8 @@
   display: flex
   align-self: flex-end
   align-items: center 
+  +mq($m)
+    align-self: center
 
 .currency__description
   display: inline-flex
@@ -54,13 +56,23 @@
   display: flex
   width: 100%
   align-items: baseline
+  +mq($m)
+    flex-wrap: wrap
+    flex-direction: column
+    align-items: center
 
 .prices__container
   width: 33.3333%
+  margin: 0 $space-between
+  +mq($m)
+    width: 60%
+    min-width: 300px
+    margin-bottom: 4rem
+    &:last-child
+      margin-bottom: 0
 
 .container
-  @extend %box-shadow
-  margin: 0 $space-between
+  @extend %box-shadow 
   padding: 4rem 0
   text-align: center
   &:hover

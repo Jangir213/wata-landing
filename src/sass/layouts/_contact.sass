@@ -1,5 +1,7 @@
 .contact
   @extend %section  
+  +mq($m)
+    padding-bottom: 0
 
 .contact__in 
   @extend %in
@@ -7,6 +9,7 @@
 
 .contact__in--row
   flex-direction: row
+  flex-wrap: wrap
   align-items: stretch
 
 .contact__title
@@ -58,6 +61,9 @@
   &:hover
     .contact__line
       background-color: $color-blue
+  +mq($m)
+    width: 100%
+    margin-bottom: 2rem
 
 .contact__info
   text-transform: uppercase

@@ -14,11 +14,14 @@
 
 .services__items
   display: flex
-  margin-bottom: 1em
+  flex-wrap: wrap
+  margin-bottom: 1rem
 
 .services__item
   width: 25%
-  padding: 0 1em
+  padding: 0 1rem
+  +mq($m)
+    width: 50%
 
 .service
   text-align: center
@@ -29,10 +32,10 @@
 
 .service__line
   @extend %line
-  margin-bottom: 1em
+  margin-bottom: 1rem
 
 .service__title
-  font-size: 1.5em
+  font-size: 1.5rem
   font-weight: 400
   letter-spacing: 3px
   line-height: 1.2em
@@ -42,14 +45,15 @@
 
 .service__description
   font-weight: 300
-  font-size: 1em
+  font-size: 1rem
   color: rgba(0,0,0,.8)
-  margin-bottom: 1em
+  margin-bottom: 1rem
 
 .service__btn
   @extend %btn
   @extend %box-shadow
   @extend %box-shadow_hover
+  margin-bottom: 1rem
 
 .service__ico
   color: $color-blue
