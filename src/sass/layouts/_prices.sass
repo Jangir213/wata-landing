@@ -66,10 +66,14 @@
   margin: 0 $space-between
   +mq($m)
     width: 60%
-    min-width: 300px
     margin-bottom: 4rem
     &:last-child
       margin-bottom: 0
+  +mq($s)
+    width: 80%
+    margin: 0 0 4rem
+  +mq($xs)
+    width: 100%
 
 .container
   @extend %box-shadow 

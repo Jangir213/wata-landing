@@ -1,5 +1,6 @@
 %section  
   padding: 5rem $space-between
+  overflow: hidden
 
 %align-center
   display: flex
@@ -11,7 +12,7 @@
   max-width: 1700px
   margin: 0 auto
   padding: 0 1.5rem
-  +mq($m)
+  +mq($l)
     width: 100%
 
 %section-underline
@@ -29,6 +30,7 @@
   display: flex
   flex-direction: column
   align-items: center
+  text-align: center
   font-size: 4rem
   text-transform: uppercase
   line-height: 110%
@@ -40,7 +42,7 @@
     background-color: $color-light-blue
     width: 100px
     height: 5px
-    margin-top: 35px
+    margin-top: 35px  
 
 %description
   width: 65%
@@ -106,6 +108,9 @@
   justify-content: center
   +mq($m)
     width: 90%
+  +mq($s)
+    width: 100%
+  
 
 %input-group
   position: relative

@@ -31,7 +31,8 @@
   src: url("../fonts/fontawesome-webfont.woff2") format("woff2"), url("../fonts/fontawesome-webfont.woff") format("woff"), url("../fonts/fontawesome-webfont.ttf") format("truetype"); }
 
 .services, .works, .started, .about, .prices, .subscribe, .posts, .contact {
-  padding: 5rem 0.75rem; }
+  padding: 5rem 0.75rem;
+  overflow: hidden; }
 
 .services:after, .about:after, .posts:after, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in {
   display: flex;
@@ -43,7 +44,7 @@
   max-width: 1700px;
   margin: 0 auto;
   padding: 0 1.5rem; }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     .services:after, .about:after, .posts:after, .promo__in, .services__in, .works__in, .started__in, .about__in, .prices__in, .subscribe__in, .posts__in, .contact__in, .footer__in {
       width: 100%; } }
 
@@ -60,6 +61,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   font-size: 4rem;
   text-transform: uppercase;
   line-height: 110%;
@@ -137,6 +139,9 @@
   @media screen and (max-width: 768px) {
     .subscribe__form, .contact__form {
       width: 90%; } }
+  @media screen and (max-width: 600px) {
+    .subscribe__form, .contact__form {
+      width: 100%; } }
 
 .subscribe__group, .contact__group {
   position: relative;
@@ -180,9 +185,15 @@ html, body {
   @media screen and (max-width: 1024px) {
     html, body {
       font-size: 13px; } }
+  @media screen and (max-width: 400px) {
+    html, body {
+      font-size: 10px; } }
 
 *, *:after, *:before {
   box-sizing: border-box; }
+
+body {
+  min-width: 240px; }
 
 a {
   cursor: pointer;
@@ -275,6 +286,15 @@ a {
   font-weight: 200;
   color: #fff;
   text-align: center; }
+  @media screen and (max-width: 1024px) {
+    .promo__title {
+      font-size: 6rem; } }
+  @media screen and (max-width: 768px) {
+    .promo__title {
+      font-size: 5rem; } }
+  @media screen and (max-width: 600px) {
+    .promo__title {
+      font-size: 4rem; } }
 
 .promo__btn {
   bottom: 15px;
@@ -289,6 +309,7 @@ a {
 .services__items {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 1rem; }
 
 .services__item {
@@ -297,6 +318,9 @@ a {
   @media screen and (max-width: 768px) {
     .services__item {
       width: 50%; } }
+  @media screen and (max-width: 600px) {
+    .services__item {
+      width: 80%; } }
 
 .service {
   text-align: center; }
@@ -354,10 +378,11 @@ a {
 
 .works__filter {
   margin-bottom: 1.5rem;
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
 
 .filter__btn {
-  margin: 0 0.1rem;
+  margin: 0.1rem;
   color: #1a237e;
   display: inline-block;
   cursor: pointer;
@@ -377,6 +402,9 @@ a {
   @media screen and (max-width: 768px) {
     .works__item {
       width: 50%; } }
+  @media screen and (max-width: 600px) {
+    .works__item {
+      width: 100%; } }
 
 .work {
   padding: 0.75rem;
@@ -394,6 +422,9 @@ a {
   text-transform: uppercase;
   font-size: 1.25rem;
   letter-spacing: 2px; }
+  @media screen and (max-width: 400px) {
+    .work__title {
+      text-align: center; } }
 
 .started {
   background-color: #f2f2f2; }
@@ -416,6 +447,9 @@ a {
 
 .about__person {
   width: 50%; }
+  @media screen and (max-width: 600px) {
+    .about__person {
+      width: 100%; } }
 
 .person {
   padding: 0.75rem;
@@ -600,10 +634,16 @@ a {
   @media screen and (max-width: 768px) {
     .prices__container {
       width: 60%;
-      min-width: 300px;
       margin-bottom: 4rem; }
       .prices__container:last-child {
         margin-bottom: 0; } }
+  @media screen and (max-width: 600px) {
+    .prices__container {
+      width: 80%;
+      margin: 0 0 4rem; } }
+  @media screen and (max-width: 400px) {
+    .prices__container {
+      width: 100%; } }
 
 .container {
   padding: 4rem 0;
@@ -638,6 +678,14 @@ a {
 .subscribe {
   background-color: #f2f2f2; }
 
+@media screen and (max-width: 600px) {
+  .subscribe__title {
+    font-size: 3.5rem; } }
+
+@media screen and (max-width: 600px) {
+  .subscribe__title {
+    font-size: 2.7rem; } }
+
 .subscribe__btn {
   background-color: #69f0ae;
   color: #1a237e;
@@ -669,6 +717,16 @@ a {
     width: 50%; }
   .posts__right-col .posts__item--wide {
     width: 100%; }
+
+@media screen and (max-width: 768px) {
+  .posts__left-col, .posts__right-col {
+    width: 50%; }
+    .posts__left-col .posts__item, .posts__right-col .posts__item {
+      width: 100%; } }
+
+@media screen and (max-width: 600px) {
+  .posts__left-col, .posts__right-col {
+    width: 100%; } }
 
 .post {
   padding: 0.75rem; }
@@ -712,6 +770,9 @@ a {
 
 .contact__group--half {
   width: 50%; }
+  @media screen and (max-width: 600px) {
+    .contact__group--half {
+      width: 100%; } }
 
 .contact__input--msg {
   resize: none;
@@ -728,6 +789,9 @@ a {
   height: 550px;
   margin-bottom: 2rem;
   padding: 0 0.75rem; }
+  @media screen and (max-width: 600px) {
+    .contact__map {
+      height: 400px; } }
 
 .contact__col {
   width: 33.3333%;

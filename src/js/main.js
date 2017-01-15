@@ -29,7 +29,9 @@
 
 
   function imgHeight() {
-    const wideImg = document.querySelector('.posts__item--wide');
+    // const wideImg = document.querySelector('.posts__item--wide');
+    const wideImg = document.querySelector('.posts__right-col > .posts__item');
+    console.log(wideImg);
 
     window.addEventListener('resize', resizeImg);
     resizeImg();
@@ -40,7 +42,15 @@
       const smallDiv = document.querySelector('.posts__left-col .posts__item');
       const pdBotDiv = parseFloat(getComputedStyle(smallDiv).paddingBottom);
       const height = heightSmallImg * 2 + pdBotDiv * 4;
-      wideImg.style.height = height + 'px';
+
+      if (screen.width <= 768) {
+        wideImg.classList.remove('posts__item--wide');
+        wideImg.style.height = '';
+      } else {
+        wideImg.classList.add('posts__item--wide');
+        wideImg.style.height = height + 'px';
+      }
+
     }
   };
 
@@ -163,6 +173,8 @@
       }, 700);
     }
   }
+
+
 
 
 

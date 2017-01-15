@@ -32,6 +32,14 @@
   .posts__item--wide
     width: 100%
 
+.posts__left-col, .posts__right-col
+  +mq($m)
+    width: 50%
+    .posts__item
+      width: 100%
+  +mq($s)
+    width: 100%
+
 .post
   padding: $space-between  
 
