@@ -3,9 +3,11 @@
     content: ''
     display: block
     position: absolute
-    height: 64px
+    height: $nav-height
     background: #fff
     width: 100%
+    +mq($m)
+      height: $nav-height_mobile
 
 .promo__content
   position: absolute

@@ -235,6 +235,9 @@ a {
   height: 64px;
   color: #fff;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+  @media screen and (max-width: 768px) {
+    .nav {
+      height: 54px; } }
 
 .nav__logo {
   padding: 0 15px;
@@ -247,6 +250,9 @@ a {
 
 .nav__items {
   display: flex; }
+  @media screen and (max-width: 768px) {
+    .nav__items {
+      display: none; } }
 
 .nav__item {
   transition: .3s; }
@@ -263,6 +269,54 @@ a {
   line-height: 64px;
   padding: 0 15px;
   font-weight: 400; }
+  @media screen and (max-width: 768px) {
+    .nav__link {
+      height: 54px;
+      line-height: 54px; } }
+
+.nav__mobile-btn {
+  display: none;
+  color: black;
+  font-size: 2rem;
+  padding: 0 15px;
+  order: -1; }
+  @media screen and (max-width: 768px) {
+    .nav__mobile-btn {
+      display: block; }
+      .nav__mobile-btn:before {
+        font-family: 'FontAwesome';
+        font-style: normal;
+        font-weight: normal;
+        content: ""; } }
+
+.nav__mobile-items {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  color: black;
+  background: rgba(255, 255, 255, 0.95);
+  width: 240px;
+  margin-left: -240px;
+  transition: .3s; }
+
+.nav__mobile-close {
+  padding: 0 15px;
+  font-size: 3.5rem;
+  align-self: end; }
+
+.nav__mobile-item {
+  padding: 0 15px;
+  line-height: 42px; }
+  .nav__mobile-item:hover {
+    background-color: #ddd; }
+
+.nav__mobile-link {
+  display: block;
+  font-size: 2rem; }
 
 .promo:before {
   content: '';
@@ -271,6 +325,9 @@ a {
   height: 64px;
   background: #fff;
   width: 100%; }
+  @media screen and (max-width: 768px) {
+    .promo:before {
+      height: 54px; } }
 
 .promo__content {
   position: absolute;
