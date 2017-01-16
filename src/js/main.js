@@ -25,13 +25,12 @@
     focusInput();
     filterWorks();
     linkClick();
+    mobileNav();
   });
 
 
   function imgHeight() {
-    // const wideImg = document.querySelector('.posts__item--wide');
     const wideImg = document.querySelector('.posts__right-col > .posts__item');
-    console.log(wideImg);
 
     window.addEventListener('resize', resizeImg);
     resizeImg();
@@ -175,7 +174,19 @@
   }
 
 
+  function mobileNav() {
+    const menuBtn = document.querySelector('.nav__mobile-btn');
+    const closeBtn = document.querySelector('.nav__mobile-close');
+    const mobileNav = document.querySelector('.nav__mobile-items');
 
+    menuBtn.addEventListener('click', () => {
+      mobileNav.style.marginLeft = '0px';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      mobileNav.style.marginLeft = '';
+    });
+  }
 
 
 })();

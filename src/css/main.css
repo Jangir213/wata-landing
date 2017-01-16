@@ -301,7 +301,7 @@ a {
   background: rgba(255, 255, 255, 0.95);
   width: 240px;
   margin-left: -240px;
-  transition: .3s; }
+  transition: .5s; }
 
 .nav__mobile-close {
   padding: 0 15px;
