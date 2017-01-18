@@ -8,6 +8,7 @@ var csso = require('gulp-csso');
 var prefixer = require('gulp-autoprefixer');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
+var rigger = require('gulp-rigger');
 var rimraf = require('rimraf');
 
 //server
@@ -35,6 +36,7 @@ gulp.task('style', function () {
 gulp.task('script', function () {
 	gulp
 		.src('src/scripts/*.js')
+		.pipe(rigger())
 		.pipe(babel({ presets: ['es2015'] }))
 		.pipe(gulp.dest('src/js'));
 });

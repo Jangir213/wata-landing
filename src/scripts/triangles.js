@@ -1,8 +1,6 @@
-"use strict";
-
 var Delaunay;
 
-(function () {
+(function() {
   "use strict";
 
   var EPSILON = 1.0 / 1048576.0;
@@ -12,18 +10,13 @@ var Delaunay;
         ymin = Number.POSITIVE_INFINITY,
         xmax = Number.NEGATIVE_INFINITY,
         ymax = Number.NEGATIVE_INFINITY,
-        i,
-        dx,
-        dy,
-        dmax,
-        xmid,
-        ymid;
+        i, dx, dy, dmax, xmid, ymid;
 
-    for (i = vertices.length; i--;) {
-      if (vertices[i][0] < xmin) xmin = vertices[i][0];
-      if (vertices[i][0] > xmax) xmax = vertices[i][0];
-      if (vertices[i][1] < ymin) ymin = vertices[i][1];
-      if (vertices[i][1] > ymax) ymax = vertices[i][1];
+    for(i = vertices.length; i--; ) {
+      if(vertices[i][0] < xmin) xmin = vertices[i][0];
+      if(vertices[i][0] > xmax) xmax = vertices[i][0];
+      if(vertices[i][1] < ymin) ymin = vertices[i][1];
+      if(vertices[i][1] > ymax) ymax = vertices[i][1];
     }
 
     dx = xmax - xmin;
@@ -32,7 +25,11 @@ var Delaunay;
     xmid = xmin + dx * 0.5;
     ymid = ymin + dy * 0.5;
 
-    return [[xmid - 20 * dmax, ymid - dmax], [xmid, ymid + 20 * dmax], [xmid + 20 * dmax, ymid - dmax]];
+    return [
+      [xmid - 20 * dmax, ymid -      dmax],
+      [xmid            , ymid + 20 * dmax],
+      [xmid + 20 * dmax, ymid -      dmax]
+    ];
   }
 
   function circumcircle(vertices, i, j, k) {
@@ -44,59 +41,57 @@ var Delaunay;
         y3 = vertices[k][1],
         fabsy1y2 = Math.abs(y1 - y2),
         fabsy2y3 = Math.abs(y2 - y3),
-        xc,
-        yc,
-        m1,
-        m2,
-        mx1,
-        mx2,
-        my1,
-        my2,
-        dx,
-        dy;
+        xc, yc, m1, m2, mx1, mx2, my1, my2, dx, dy;
 
-    if (fabsy1y2 < EPSILON && fabsy2y3 < EPSILON) throw new Error("Error!");
+    if(fabsy1y2 < EPSILON && fabsy2y3 < EPSILON)
+      throw new Error("Error!");
 
-    if (fabsy1y2 < EPSILON) {
-      m2 = -((x3 - x2) / (y3 - y2));
+    if(fabsy1y2 < EPSILON) {
+      m2  = -((x3 - x2) / (y3 - y2));
       mx2 = (x2 + x3) / 2.0;
       my2 = (y2 + y3) / 2.0;
-      xc = (x2 + x1) / 2.0;
-      yc = m2 * (xc - mx2) + my2;
-    } else if (fabsy2y3 < EPSILON) {
-      m1 = -((x2 - x1) / (y2 - y1));
+      xc  = (x2 + x1) / 2.0;
+      yc  = m2 * (xc - mx2) + my2;
+    }
+
+    else if(fabsy2y3 < EPSILON) {
+      m1  = -((x2 - x1) / (y2 - y1));
       mx1 = (x1 + x2) / 2.0;
       my1 = (y1 + y2) / 2.0;
-      xc = (x3 + x2) / 2.0;
-      yc = m1 * (xc - mx1) + my1;
-    } else {
-      m1 = -((x2 - x1) / (y2 - y1));
-      m2 = -((x3 - x2) / (y3 - y2));
+      xc  = (x3 + x2) / 2.0;
+      yc  = m1 * (xc - mx1) + my1;
+    }
+
+    else {
+      m1  = -((x2 - x1) / (y2 - y1));
+      m2  = -((x3 - x2) / (y3 - y2));
       mx1 = (x1 + x2) / 2.0;
       mx2 = (x2 + x3) / 2.0;
       my1 = (y1 + y2) / 2.0;
       my2 = (y2 + y3) / 2.0;
-      xc = (m1 * mx1 - m2 * mx2 + my2 - my1) / (m1 - m2);
-      yc = fabsy1y2 > fabsy2y3 ? m1 * (xc - mx1) + my1 : m2 * (xc - mx2) + my2;
+      xc  = (m1 * mx1 - m2 * mx2 + my2 - my1) / (m1 - m2);
+      yc  = (fabsy1y2 > fabsy2y3) ?
+        m1 * (xc - mx1) + my1 :
+        m2 * (xc - mx2) + my2;
     }
 
     dx = x2 - xc;
     dy = y2 - yc;
-    return { i: i, j: j, k: k, x: xc, y: yc, r: dx * dx + dy * dy };
+    return {i: i, j: j, k: k, x: xc, y: yc, r: dx * dx + dy * dy};
   }
 
   function dedup(edges) {
     var i, j, a, b, m, n;
 
-    for (j = edges.length; j;) {
+    for(j = edges.length; j; ) {
       b = edges[--j];
       a = edges[--j];
 
-      for (i = j; i;) {
+      for(i = j; i; ) {
         n = edges[--i];
         m = edges[--i];
 
-        if (a === m && b === n || a === n && b === m) {
+        if((a === m && b === n) || (a === n && b === m)) {
           edges.splice(j, 2);
           edges.splice(i, 2);
           break;
@@ -106,80 +101,87 @@ var Delaunay;
   }
 
   Delaunay = {
-    triangulate: function triangulate(vertices, key) {
+    triangulate: function(vertices, key) {
       var n = vertices.length,
-          i,
-          j,
-          indices,
-          st,
-          open,
-          closed,
-          edges,
-          dx,
-          dy,
-          a,
-          b,
-          c;
+          i, j, indices, st, open, closed, edges, dx, dy, a, b, c;
 
-      if (n < 3) return [];
+      if(n < 3)
+        return [];
 
       vertices = vertices.slice(0);
 
-      if (key) for (i = n; i--;) {
-        vertices[i] = vertices[i][key];
-      }indices = new Array(n);
+      if(key)
+        for(i = n; i--; )
+          vertices[i] = vertices[i][key];
 
-      for (i = n; i--;) {
+      indices = new Array(n);
+
+      for(i = n; i--; )
         indices[i] = i;
-      }indices.sort(function (i, j) {
+
+      indices.sort(function(i, j) {
         return vertices[j][0] - vertices[i][0];
       });
 
+      
       st = supertriangle(vertices);
       vertices.push(st[0], st[1], st[2]);
 
-      open = [circumcircle(vertices, n + 0, n + 1, n + 2)];
+      open   = [circumcircle(vertices, n + 0, n + 1, n + 2)];
       closed = [];
-      edges = [];
+      edges  = [];
 
-      for (i = indices.length; i--; edges.length = 0) {
+      for(i = indices.length; i--; edges.length = 0) {
         c = indices[i];
 
-        for (j = open.length; j--;) {
+        for(j = open.length; j--; ) {
           dx = vertices[c][0] - open[j].x;
-          if (dx > 0.0 && dx * dx > open[j].r) {
+          if(dx > 0.0 && dx * dx > open[j].r) {
             closed.push(open[j]);
             open.splice(j, 1);
             continue;
           }
 
           dy = vertices[c][1] - open[j].y;
-          if (dx * dx + dy * dy - open[j].r > EPSILON) continue;
+          if(dx * dx + dy * dy - open[j].r > EPSILON)
+            continue;
 
-          edges.push(open[j].i, open[j].j, open[j].j, open[j].k, open[j].k, open[j].i);
+          edges.push(
+            open[j].i, open[j].j,
+            open[j].j, open[j].k,
+            open[j].k, open[j].i
+          );
           open.splice(j, 1);
         }
 
         dedup(edges);
 
-        for (j = edges.length; j;) {
+        for(j = edges.length; j; ) {
           b = edges[--j];
           a = edges[--j];
           open.push(circumcircle(vertices, a, b, c));
         }
       }
 
-      for (i = open.length; i--;) {
+   
+      for(i = open.length; i--; )
         closed.push(open[i]);
-      }open.length = 0;
+      open.length = 0;
 
-      for (i = closed.length; i--;) {
-        if (closed[i].i < n && closed[i].j < n && closed[i].k < n) open.push(closed[i].i, closed[i].j, closed[i].k);
-      }return open;
+      for(i = closed.length; i--; )
+        if(closed[i].i < n && closed[i].j < n && closed[i].k < n)
+          open.push(closed[i].i, closed[i].j, closed[i].k);
+
+     
+      return open;
     },
-    contains: function contains(tri, p) {
-
-      if (p[0] < tri[0][0] && p[0] < tri[1][0] && p[0] < tri[2][0] || p[0] > tri[0][0] && p[0] > tri[1][0] && p[0] > tri[2][0] || p[1] < tri[0][1] && p[1] < tri[1][1] && p[1] < tri[2][1] || p[1] > tri[0][1] && p[1] > tri[1][1] && p[1] > tri[2][1]) return null;
+    contains: function(tri, p) {
+  
+      if((p[0] < tri[0][0] && p[0] < tri[1][0] && p[0] < tri[2][0]) ||
+         (p[0] > tri[0][0] && p[0] > tri[1][0] && p[0] > tri[2][0]) ||
+         (p[1] < tri[0][1] && p[1] < tri[1][1] && p[1] < tri[2][1]) ||
+         (p[1] > tri[0][1] && p[1] > tri[1][1] && p[1] > tri[2][1]))
+        return null;
 
       var a = tri[1][0] - tri[0][0],
           b = tri[2][0] - tri[0][0],
@@ -187,29 +189,36 @@ var Delaunay;
           d = tri[2][1] - tri[0][1],
           i = a * d - b * c;
 
-      if (i === 0.0) return null;
+     
+      if(i === 0.0)
+        return null;
 
       var u = (d * (p[0] - tri[0][0]) - b * (p[1] - tri[0][1])) / i,
           v = (a * (p[1] - tri[0][1]) - c * (p[0] - tri[0][0])) / i;
 
-      if (u < 0.0 || v < 0.0 || u + v > 1.0) return null;
+     
+      if(u < 0.0 || v < 0.0 || (u + v) > 1.0)
+        return null;
 
       return [u, v];
     }
   };
 
-  if (typeof module !== "undefined") module.exports = Delaunay;
+  if(typeof module !== "undefined")
+    module.exports = Delaunay;
 })();
+
+
 
 /**
  * Defines the Flat Surface Shader namespace for all the awesomeness to exist upon.
  * @author Matthew Wagerfield
  */
 FSS = {
-  FRONT: 0,
-  BACK: 1,
-  DOUBLE: 2,
-  SVGNS: 'http://www.w3.org/2000/svg'
+  FRONT  : 0,
+  BACK   : 1,
+  DOUBLE : 2,
+  SVGNS  : 'http://www.w3.org/2000/svg'
 };
 
 /**
@@ -223,7 +232,7 @@ FSS.Array = typeof Float32Array === 'function' ? Float32Array : Array;
  * @author Matthew Wagerfield
  */
 FSS.Utils = {
-  isNumber: function isNumber(value) {
+  isNumber: function(value) {
     return !isNaN(parseFloat(value)) && isFinite(value);
   }
 };
@@ -233,21 +242,21 @@ FSS.Utils = {
  * @author Paul Irish
  * @see https://gist.github.com/paulirish/1579671
  */
-(function () {
+(function() {
 
   var lastTime = 0;
   var vendors = ['ms', 'moz', 'webkit', 'o'];
 
-  for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-    window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-    window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+  for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+    window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+    window.cancelAnimationFrame  = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
   }
 
   if (!window.requestAnimationFrame) {
-    window.requestAnimationFrame = function (callback, element) {
+    window.requestAnimationFrame = function(callback, element) {
       var currentTime = new Date().getTime();
       var timeToCall = Math.max(0, 16 - (currentTime - lastTime));
-      var id = window.setTimeout(function () {
+      var id = window.setTimeout(function() {
         callback(currentTime + timeToCall);
       }, timeToCall);
       lastTime = currentTime + timeToCall;
@@ -256,22 +265,23 @@ FSS.Utils = {
   }
 
   if (!window.cancelAnimationFrame) {
-    window.cancelAnimationFrame = function (id) {
+    window.cancelAnimationFrame = function(id) {
       clearTimeout(id);
     };
   }
-})();
+
+}());
 
 /**
  * @object Math Augmentation
  * @author Matthew Wagerfield
  */
-Math.PIM2 = Math.PI * 2;
-Math.PID2 = Math.PI / 2;
-Math.randomInRange = function (min, max) {
+Math.PIM2 = Math.PI*2;
+Math.PID2 = Math.PI/2;
+Math.randomInRange = function(min, max) {
   return min + (max - min) * Math.random();
 };
-Math.clamp = function (value, min, max) {
+Math.clamp = function(value, min, max) {
   value = Math.max(value, min);
   value = Math.min(value, max);
   return value;
@@ -282,107 +292,107 @@ Math.clamp = function (value, min, max) {
  * @author Matthew Wagerfield
  */
 FSS.Vector3 = {
-  create: function create(x, y, z) {
+  create: function(x, y, z) {
     var vector = new FSS.Array(3);
     this.set(vector, x, y, z);
     return vector;
   },
-  clone: function clone(a) {
+  clone: function(a) {
     var vector = this.create();
     this.copy(vector, a);
     return vector;
   },
-  set: function set(target, x, y, z) {
+  set: function(target, x, y, z) {
     target[0] = x || 0;
     target[1] = y || 0;
     target[2] = z || 0;
     return this;
   },
-  setX: function setX(target, x) {
+  setX: function(target, x) {
     target[0] = x || 0;
     return this;
   },
-  setY: function setY(target, y) {
+  setY: function(target, y) {
     target[1] = y || 0;
     return this;
   },
-  setZ: function setZ(target, z) {
+  setZ: function(target, z) {
     target[2] = z || 0;
     return this;
   },
-  copy: function copy(target, a) {
+  copy: function(target, a) {
     target[0] = a[0];
     target[1] = a[1];
     target[2] = a[2];
     return this;
   },
-  add: function add(target, a) {
+  add: function(target, a) {
     target[0] += a[0];
     target[1] += a[1];
     target[2] += a[2];
     return this;
   },
-  addVectors: function addVectors(target, a, b) {
+  addVectors: function(target, a, b) {
     target[0] = a[0] + b[0];
     target[1] = a[1] + b[1];
     target[2] = a[2] + b[2];
     return this;
   },
-  addScalar: function addScalar(target, s) {
+  addScalar: function(target, s) {
     target[0] += s;
     target[1] += s;
     target[2] += s;
     return this;
   },
-  subtract: function subtract(target, a) {
+  subtract: function(target, a) {
     target[0] -= a[0];
     target[1] -= a[1];
     target[2] -= a[2];
     return this;
   },
-  subtractVectors: function subtractVectors(target, a, b) {
+  subtractVectors: function(target, a, b) {
     target[0] = a[0] - b[0];
     target[1] = a[1] - b[1];
     target[2] = a[2] - b[2];
     return this;
   },
-  subtractScalar: function subtractScalar(target, s) {
+  subtractScalar: function(target, s) {
     target[0] -= s;
     target[1] -= s;
     target[2] -= s;
     return this;
   },
-  multiply: function multiply(target, a) {
+  multiply: function(target, a) {
     target[0] *= a[0];
     target[1] *= a[1];
     target[2] *= a[2];
     return this;
   },
-  multiplyVectors: function multiplyVectors(target, a, b) {
+  multiplyVectors: function(target, a, b) {
     target[0] = a[0] * b[0];
     target[1] = a[1] * b[1];
     target[2] = a[2] * b[2];
     return this;
   },
-  multiplyScalar: function multiplyScalar(target, s) {
+  multiplyScalar: function(target, s) {
     target[0] *= s;
     target[1] *= s;
     target[2] *= s;
     return this;
   },
-  divide: function divide(target, a) {
+  divide: function(target, a) {
     target[0] /= a[0];
     target[1] /= a[1];
     target[2] /= a[2];
     return this;
   },
-  divideVectors: function divideVectors(target, a, b) {
+  divideVectors: function(target, a, b) {
     target[0] = a[0] / b[0];
     target[1] = a[1] / b[1];
     target[2] = a[2] / b[2];
     return this;
   },
-  divideScalar: function divideScalar(target, s) {
+  divideScalar: function(target, s) {
     if (s !== 0) {
       target[0] /= s;
       target[1] /= s;
@@ -394,51 +404,39 @@ FSS.Vector3 = {
     }
     return this;
   },
-  cross: function cross(target, a) {
+  cross: function(target, a) {
     var x = target[0];
     var y = target[1];
     var z = target[2];
-    target[0] = y * a[2] - z * a[1];
-    target[1] = z * a[0] - x * a[2];
-    target[2] = x * a[1] - y * a[0];
+    target[0] = y*a[2] - z*a[1];
+    target[1] = z*a[0] - x*a[2];
+    target[2] = x*a[1] - y*a[0];
     return this;
   },
-  crossVectors: function crossVectors(target, a, b) {
-    target[0] = a[1] * b[2] - a[2] * b[1];
-    target[1] = a[2] * b[0] - a[0] * b[2];
-    target[2] = a[0] * b[1] - a[1] * b[0];
+  crossVectors: function(target, a, b) {
+    target[0] = a[1]*b[2] - a[2]*b[1];
+    target[1] = a[2]*b[0] - a[0]*b[2];
+    target[2] = a[0]*b[1] - a[1]*b[0];
     return this;
   },
-  min: function min(target, value) {
-    if (target[0] < value) {
-      target[0] = value;
-    }
-    if (target[1] < value) {
-      target[1] = value;
-    }
-    if (target[2] < value) {
-      target[2] = value;
-    }
+  min: function(target, value) {
+    if (target[0] < value) { target[0] = value; }
+    if (target[1] < value) { target[1] = value; }
+    if (target[2] < value) { target[2] = value; }
     return this;
   },
-  max: function max(target, value) {
-    if (target[0] > value) {
-      target[0] = value;
-    }
-    if (target[1] > value) {
-      target[1] = value;
-    }
-    if (target[2] > value) {
-      target[2] = value;
-    }
+  max: function(target, value) {
+    if (target[0] > value) { target[0] = value; }
+    if (target[1] > value) { target[1] = value; }
+    if (target[2] > value) { target[2] = value; }
     return this;
   },
-  clamp: function clamp(target, min, max) {
+  clamp: function(target, min, max) {
     this.min(target, min);
     this.max(target, max);
     return this;
   },
-  limit: function limit(target, min, max) {
+  limit: function(target, min, max) {
     var length = this.length(target);
     if (min !== null && length < min) {
       this.setLength(target, min);
@@ -447,31 +445,31 @@ FSS.Vector3 = {
     }
     return this;
   },
-  dot: function dot(a, b) {
-    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  dot: function(a, b) {
+    return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
   },
-  normalise: function normalise(target) {
+  normalise: function(target) {
     return this.divideScalar(target, this.length(target));
   },
-  negate: function negate(target) {
+  negate: function(target) {
     return this.multiplyScalar(target, -1);
   },
-  distanceSquared: function distanceSquared(a, b) {
+  distanceSquared: function(a, b) {
     var dx = a[0] - b[0];
     var dy = a[1] - b[1];
     var dz = a[2] - b[2];
-    return dx * dx + dy * dy + dz * dz;
+    return dx*dx + dy*dy + dz*dz;
   },
-  distance: function distance(a, b) {
+  distance: function(a, b) {
     return Math.sqrt(this.distanceSquared(a, b));
   },
-  lengthSquared: function lengthSquared(a) {
-    return a[0] * a[0] + a[1] * a[1] + a[2] * a[2];
+  lengthSquared: function(a) {
+    return a[0]*a[0] + a[1]*a[1] + a[2]*a[2];
   },
-  length: function length(a) {
+  length: function(a) {
     return Math.sqrt(this.lengthSquared(a));
   },
-  setLength: function setLength(target, l) {
+  setLength: function(target, l) {
     var length = this.length(target);
     if (length !== 0 && l !== length) {
       this.multiplyScalar(target, l / length);
@@ -485,86 +483,70 @@ FSS.Vector3 = {
  * @author Matthew Wagerfield
  */
 FSS.Vector4 = {
-  create: function create(x, y, z, w) {
+  create: function(x, y, z, w) {
     var vector = new FSS.Array(4);
     this.set(vector, x, y, z);
     return vector;
   },
-  set: function set(target, x, y, z, w) {
+  set: function(target, x, y, z, w) {
     target[0] = x || 0;
     target[1] = y || 0;
     target[2] = z || 0;
     target[3] = w || 0;
     return this;
   },
-  setX: function setX(target, x) {
+  setX: function(target, x) {
     target[0] = x || 0;
     return this;
   },
-  setY: function setY(target, y) {
+  setY: function(target, y) {
     target[1] = y || 0;
     return this;
   },
-  setZ: function setZ(target, z) {
+  setZ: function(target, z) {
     target[2] = z || 0;
     return this;
   },
-  setW: function setW(target, w) {
+  setW: function(target, w) {
     target[3] = w || 0;
     return this;
   },
-  add: function add(target, a) {
+  add: function(target, a) {
     target[0] += a[0];
     target[1] += a[1];
     target[2] += a[2];
     target[3] += a[3];
     return this;
   },
-  multiplyVectors: function multiplyVectors(target, a, b) {
+  multiplyVectors: function(target, a, b) {
     target[0] = a[0] * b[0];
     target[1] = a[1] * b[1];
     target[2] = a[2] * b[2];
     target[3] = a[3] * b[3];
     return this;
   },
-  multiplyScalar: function multiplyScalar(target, s) {
+  multiplyScalar: function(target, s) {
     target[0] *= s;
     target[1] *= s;
     target[2] *= s;
     target[3] *= s;
     return this;
   },
-  min: function min(target, value) {
-    if (target[0] < value) {
-      target[0] = value;
-    }
-    if (target[1] < value) {
-      target[1] = value;
-    }
-    if (target[2] < value) {
-      target[2] = value;
-    }
-    if (target[3] < value) {
-      target[3] = value;
-    }
+  min: function(target, value) {
+    if (target[0] < value) { target[0] = value; }
+    if (target[1] < value) { target[1] = value; }
+    if (target[2] < value) { target[2] = value; }
+    if (target[3] < value) { target[3] = value; }
     return this;
   },
-  max: function max(target, value) {
-    if (target[0] > value) {
-      target[0] = value;
-    }
-    if (target[1] > value) {
-      target[1] = value;
-    }
-    if (target[2] > value) {
-      target[2] = value;
-    }
-    if (target[3] > value) {
-      target[3] = value;
-    }
+  max: function(target, value) {
+    if (target[0] > value) { target[0] = value; }
+    if (target[1] > value) { target[1] = value; }
+    if (target[2] > value) { target[2] = value; }
+    if (target[3] > value) { target[3] = value; }
     return this;
   },
-  clamp: function clamp(target, min, max) {
+  clamp: function(target, min, max) {
     this.min(target, min);
     this.max(target, max);
     return this;
@@ -575,7 +557,7 @@ FSS.Vector4 = {
  * @class Color
  * @author Matthew Wagerfield
  */
-FSS.Color = function (hex, opacity) {
+FSS.Color = function(hex, opacity) {
   this.rgba = FSS.Vector4.create();
   this.hex = hex || '#000000';
   this.opacity = FSS.Utils.isNumber(opacity) ? opacity : 1;
@@ -583,23 +565,21 @@ FSS.Color = function (hex, opacity) {
 };
 
 FSS.Color.prototype = {
-  set: function set(hex, opacity) {
+  set: function(hex, opacity) {
     hex = hex.replace('#', '');
     var size = hex.length / 3;
-    this.rgba[0] = parseInt(hex.substring(size * 0, size * 1), 16) / 255;
-    this.rgba[1] = parseInt(hex.substring(size * 1, size * 2), 16) / 255;
-    this.rgba[2] = parseInt(hex.substring(size * 2, size * 3), 16) / 255;
+    this.rgba[0] = parseInt(hex.substring(size*0, size*1), 16) / 255;
+    this.rgba[1] = parseInt(hex.substring(size*1, size*2), 16) / 255;
+    this.rgba[2] = parseInt(hex.substring(size*2, size*3), 16) / 255;
     this.rgba[3] = FSS.Utils.isNumber(opacity) ? opacity : this.rgba[3];
     return this;
   },
-  hexify: function hexify(channel) {
-    var hex = Math.ceil(channel * 255).toString(16);
-    if (hex.length === 1) {
-      hex = '0' + hex;
-    }
+  hexify: function(channel) {
+    var hex = Math.ceil(channel*255).toString(16);
+    if (hex.length === 1) { hex = '0' + hex; }
     return hex;
   },
-  format: function format() {
+  format: function() {
     var r = this.hexify(this.rgba[0]);
     var g = this.hexify(this.rgba[1]);
     var b = this.hexify(this.rgba[2]);
@@ -612,12 +592,12 @@ FSS.Color.prototype = {
  * @class Object
  * @author Matthew Wagerfield
  */
-FSS.Object = function () {
+FSS.Object = function() {
   this.position = FSS.Vector3.create();
 };
 
 FSS.Object.prototype = {
-  setPosition: function setPosition(x, y, z) {
+  setPosition: function(x, y, z) {
     FSS.Vector3.set(this.position, x, y, z);
     return this;
   }
@@ -627,7 +607,7 @@ FSS.Object.prototype = {
  * @class Light
  * @author Matthew Wagerfield
  */
-FSS.Light = function (ambient, diffuse) {
+FSS.Light = function(ambient, diffuse) {
   FSS.Object.call(this);
   this.ambient = new FSS.Color(ambient || '#FFFFFF');
   this.diffuse = new FSS.Color(diffuse || '#FFFFFF');
@@ -640,12 +620,12 @@ FSS.Light.prototype = Object.create(FSS.Object.prototype);
  * @class Vertex
  * @author Matthew Wagerfield
  */
-FSS.Vertex = function (x, y, z) {
+FSS.Vertex = function(x, y, z) {
   this.position = FSS.Vector3.create(x, y, z);
 };
 
 FSS.Vertex.prototype = {
-  setPosition: function setPosition(x, y, z) {
+  setPosition: function(x, y, z) {
     FSS.Vector3.set(this.position, x, y, z);
     return this;
   }
@@ -655,7 +635,7 @@ FSS.Vertex.prototype = {
  * @class Triangle
  * @author Matthew Wagerfield
  */
-FSS.Triangle = function (a, b, c) {
+FSS.Triangle = function(a, b, c) {
   this.a = a || new FSS.Vertex();
   this.b = b || new FSS.Vertex();
   this.c = c || new FSS.Vertex();
@@ -674,14 +654,14 @@ FSS.Triangle = function (a, b, c) {
 };
 
 FSS.Triangle.prototype = {
-  computeCentroid: function computeCentroid() {
+  computeCentroid: function() {
     this.centroid[0] = this.a.position[0] + this.b.position[0] + this.c.position[0];
     this.centroid[1] = this.a.position[1] + this.b.position[1] + this.c.position[1];
     this.centroid[2] = this.a.position[2] + this.b.position[2] + this.c.position[2];
     FSS.Vector3.divideScalar(this.centroid, 3);
     return this;
   },
-  computeNormal: function computeNormal() {
+  computeNormal: function() {
     FSS.Vector3.subtractVectors(this.u, this.b.position, this.a.position);
     FSS.Vector3.subtractVectors(this.v, this.c.position, this.a.position);
     FSS.Vector3.crossVectors(this.normal, this.u, this.v);
@@ -694,16 +674,16 @@ FSS.Triangle.prototype = {
  * @class Geometry
  * @author Matthew Wagerfield
  */
-FSS.Geometry = function () {
+FSS.Geometry = function() {
   this.vertices = [];
   this.triangles = [];
   this.dirty = false;
 };
 
 FSS.Geometry.prototype = {
-  update: function update() {
+  update: function() {
     if (this.dirty) {
-      var t, triangle;
+      var t,triangle;
       for (t = this.triangles.length - 1; t >= 0; t--) {
         triangle = this.triangles[t];
         triangle.computeCentroid();
@@ -719,53 +699,52 @@ FSS.Geometry.prototype = {
  * @class Plane
  * @author Matthew Wagerfield, modified by Maksim Surguy to implement Delaunay triangulation
  */
-FSS.Plane = function (width, height, howmany) {
+FSS.Plane = function(width, height, howmany) {
   FSS.Geometry.call(this);
   this.width = width || 100;
   this.height = height || 100;
 
   // Cache Variables
-  var x,
-      y,
-      vertices = new Array(howmany);
-  offsetX = this.width * -0.5, offsetY = this.height * 0.5;
+  var x, y, vertices = new Array(howmany);
+    offsetX = this.width * -0.5,
+    offsetY = this.height * 0.5;
 
-  for (i = vertices.length; i--;) {
-    x = offsetX + Math.random() * width;
-    y = offsetY - Math.random() * height;
+  for(i = vertices.length; i--; ) {
+    x =  offsetX + Math.random()*width;
+    y =  offsetY - Math.random()*height;
 
     vertices[i] = [x, y];
   }
 
   // Generate additional points on the perimeter so that there are no holes in the pattern
   vertices.push([offsetX, offsetY]);
-  vertices.push([offsetX + width / 2, offsetY]);
+  vertices.push([offsetX + width/2, offsetY]);
   vertices.push([offsetX + width, offsetY]);
-  vertices.push([offsetX + width, offsetY - height / 2]);
+  vertices.push([offsetX + width, offsetY - height/2]);
   vertices.push([offsetX + width, offsetY - height]);
-  vertices.push([offsetX + width / 2, offsetY - height]);
+  vertices.push([offsetX + width/2, offsetY - height]);
   vertices.push([offsetX, offsetY - height]);
-  vertices.push([offsetX, offsetY - height / 2]);
+  vertices.push([offsetX, offsetY - height/2]);
 
   // Generate additional randomly placed points on the perimeter
   for (var i = 6; i >= 0; i--) {
-    vertices.push([offsetX + Math.random() * width, offsetY]);
-    vertices.push([offsetX, offsetY - Math.random() * height]);
-    vertices.push([offsetX + width, offsetY - Math.random() * height]);
-    vertices.push([offsetX + Math.random() * width, offsetY - height]);
+    vertices.push([ offsetX + Math.random()*width, offsetY]);
+    vertices.push([ offsetX, offsetY - Math.random()*height]);
+    vertices.push([ offsetX + width, offsetY - Math.random()*height]);
+    vertices.push([ offsetX + Math.random()*width, offsetY-height]);
   }
 
   // Create an array of triangulated coordinates from our vertices
   var triangles = Delaunay.triangulate(vertices);
 
-  for (i = triangles.length; i;) {
+  for(i = triangles.length; i; ) {
     --i;
     v1 = new FSS.Vertex(Math.ceil(vertices[triangles[i]][0]), Math.ceil(vertices[triangles[i]][1]));
     --i;
     v2 = new FSS.Vertex(Math.ceil(vertices[triangles[i]][0]), Math.ceil(vertices[triangles[i]][1]));
     --i;
     v3 = new FSS.Vertex(Math.ceil(vertices[triangles[i]][0]), Math.ceil(vertices[triangles[i]][1]));
-    t1 = new FSS.Triangle(v1, v2, v3);
+    t1 = new FSS.Triangle(v1,v2,v3);
     this.triangles.push(t1);
     this.vertices.push(v1);
     this.vertices.push(v2);
@@ -779,7 +758,7 @@ FSS.Plane.prototype = Object.create(FSS.Geometry.prototype);
  * @class Material
  * @author Matthew Wagerfield
  */
-FSS.Material = function (ambient, diffuse) {
+FSS.Material = function(ambient, diffuse) {
   this.ambient = new FSS.Color(ambient || '#444444');
   this.diffuse = new FSS.Color(diffuse || '#FFFFFF');
   this.slave = new FSS.Color();
@@ -789,7 +768,7 @@ FSS.Material = function (ambient, diffuse) {
  * @class Mesh
  * @author Matthew Wagerfield
  */
-FSS.Mesh = function (geometry, material) {
+FSS.Mesh = function(geometry, material) {
   FSS.Object.call(this);
   this.geometry = geometry || new FSS.Geometry();
   this.material = material || new FSS.Material();
@@ -799,8 +778,8 @@ FSS.Mesh = function (geometry, material) {
 
 FSS.Mesh.prototype = Object.create(FSS.Object.prototype);
 
-FSS.Mesh.prototype.update = function (lights, calculate) {
-  var t, triangle, l, light, illuminance;
+FSS.Mesh.prototype.update = function(lights, calculate) {
+  var t,triangle, l,light, illuminance;
 
   // Update Geometry
   this.geometry.update();
@@ -852,13 +831,13 @@ FSS.Mesh.prototype.update = function (lights, calculate) {
  * @class Scene
  * @author Matthew Wagerfield
  */
-FSS.Scene = function () {
+FSS.Scene = function() {
   this.meshes = [];
   this.lights = [];
 };
 
 FSS.Scene.prototype = {
-  add: function add(object) {
+  add: function(object) {
     if (object instanceof FSS.Mesh && !~this.meshes.indexOf(object)) {
       this.meshes.push(object);
     } else if (object instanceof FSS.Light && !~this.lights.indexOf(object)) {
@@ -866,7 +845,7 @@ FSS.Scene.prototype = {
     }
     return this;
   },
-  remove: function remove(object) {
+  remove: function(object) {
     if (object instanceof FSS.Mesh && ~this.meshes.indexOf(object)) {
       this.meshes.splice(this.meshes.indexOf(object), 1);
     } else if (object instanceof FSS.Light && ~this.lights.indexOf(object)) {
@@ -880,7 +859,7 @@ FSS.Scene.prototype = {
  * @class Renderer
  * @author Matthew Wagerfield
  */
-FSS.Renderer = function () {
+FSS.Renderer = function() {
   this.width = 0;
   this.height = 0;
   this.halfWidth = 0;
@@ -888,7 +867,7 @@ FSS.Renderer = function () {
 };
 
 FSS.Renderer.prototype = {
-  setSize: function setSize(width, height) {
+  setSize: function(width, height) {
     if (this.width === width && this.height === height) return;
     this.width = width;
     this.height = height;
@@ -896,10 +875,10 @@ FSS.Renderer.prototype = {
     this.halfHeight = this.height * 0.5;
     return this;
   },
-  clear: function clear() {
+  clear: function() {
     return this;
   },
-  render: function render(scene) {
+  render: function(scene) {
     return this;
   }
 };
@@ -908,7 +887,7 @@ FSS.Renderer.prototype = {
  * @class Canvas Renderer
  * @author Matthew Wagerfield
  */
-FSS.CanvasRenderer = function () {
+FSS.CanvasRenderer = function() {
   FSS.Renderer.call(this);
   this.element = document.createElement('canvas');
   this.element.style.display = 'block';
@@ -918,7 +897,7 @@ FSS.CanvasRenderer = function () {
 
 FSS.CanvasRenderer.prototype = Object.create(FSS.Renderer.prototype);
 
-FSS.CanvasRenderer.prototype.setSize = function (width, height) {
+FSS.CanvasRenderer.prototype.setSize = function(width, height) {
   FSS.Renderer.prototype.setSize.call(this, width, height);
   this.element.width = width;
   this.element.height = height;
@@ -926,15 +905,15 @@ FSS.CanvasRenderer.prototype.setSize = function (width, height) {
   return this;
 };
 
-FSS.CanvasRenderer.prototype.clear = function () {
+FSS.CanvasRenderer.prototype.clear = function() {
   FSS.Renderer.prototype.clear.call(this);
   this.context.clearRect(-this.halfWidth, -this.halfHeight, this.width, this.height);
   return this;
 };
 
-FSS.CanvasRenderer.prototype.render = function (scene) {
+FSS.CanvasRenderer.prototype.render = function(scene) {
   FSS.Renderer.prototype.render.call(this, scene);
-  var m, mesh, t, triangle, color;
+  var m,mesh, t,triangle, color;
 
   // Clear Context
   this.clear();
@@ -972,7 +951,7 @@ FSS.CanvasRenderer.prototype.render = function (scene) {
  * @class WebGL Renderer
  * @author Matthew Wagerfield
  */
-FSS.WebGLRenderer = function () {
+FSS.WebGLRenderer = function() {
   FSS.Renderer.call(this);
   this.element = document.createElement('canvas');
   this.element.style.display = 'block';
@@ -1008,7 +987,7 @@ FSS.WebGLRenderer = function () {
 
 FSS.WebGLRenderer.prototype = Object.create(FSS.Renderer.prototype);
 
-FSS.WebGLRenderer.prototype.getContext = function (canvas, parameters) {
+FSS.WebGLRenderer.prototype.getContext = function(canvas, parameters) {
   var context = false;
   try {
     if (!(context = canvas.getContext('experimental-webgl', parameters))) {
@@ -1020,7 +999,7 @@ FSS.WebGLRenderer.prototype.getContext = function (canvas, parameters) {
   return context;
 };
 
-FSS.WebGLRenderer.prototype.setSize = function (width, height) {
+FSS.WebGLRenderer.prototype.setSize = function(width, height) {
   FSS.Renderer.prototype.setSize.call(this, width, height);
   if (this.unsupported) return;
 
@@ -1033,35 +1012,20 @@ FSS.WebGLRenderer.prototype.setSize = function (width, height) {
   return this;
 };
 
-FSS.WebGLRenderer.prototype.clear = function () {
+FSS.WebGLRenderer.prototype.clear = function() {
   FSS.Renderer.prototype.clear.call(this);
   if (this.unsupported) return;
   this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
   return this;
 };
 
-FSS.WebGLRenderer.prototype.render = function (scene) {
+FSS.WebGLRenderer.prototype.render = function(scene) {
   FSS.Renderer.prototype.render.call(this, scene);
   if (this.unsupported) return;
-  var m,
-      mesh,
-      t,
-      tl,
-      triangle,
-      l,
-      light,
-      attribute,
-      uniform,
-      buffer,
-      data,
-      location,
-      update = false,
-      lights = scene.lights.length,
-      index,
-      v,
-      vl,
-      vetex,
-      vertices = 0;
+  var m,mesh, t,tl,triangle, l,light,
+      attribute, uniform, buffer, data, location,
+      update = false, lights = scene.lights.length,
+      index, v,vl,vetex,vertices = 0;
 
   // Clear context
   this.clear();
@@ -1084,7 +1048,7 @@ FSS.WebGLRenderer.prototype.render = function (scene) {
       mesh = scene.meshes[m];
       if (mesh.geometry.dirty) update = true;
       mesh.update(scene.lights, false);
-      vertices += mesh.geometry.triangles.length * 3;
+      vertices += mesh.geometry.triangles.length*3;
     }
 
     // Compare vertex counter
@@ -1094,7 +1058,7 @@ FSS.WebGLRenderer.prototype.render = function (scene) {
       // Build buffers
       for (attribute in this.program.attributes) {
         buffer = this.program.attributes[attribute];
-        buffer.data = new FSS.Array(vertices * buffer.size);
+        buffer.data = new FSS.Array(vertices*buffer.size);
 
         // Reset vertex index
         index = 0;
@@ -1143,7 +1107,7 @@ FSS.WebGLRenderer.prototype.render = function (scene) {
 
     // Build uniform buffers
     this.setBufferData(0, this.program.uniforms.resolution, [this.width, this.height, this.width]);
-    for (l = lights - 1; l >= 0; l--) {
+    for (l = lights-1; l >= 0; l--) {
       light = scene.lights[l];
       this.setBufferData(l, this.program.uniforms.lightPosition, light.position);
       this.setBufferData(l, this.program.uniforms.lightAmbient, light.ambient.rgba);
@@ -1174,12 +1138,12 @@ FSS.WebGLRenderer.prototype.render = function (scene) {
   return this;
 };
 
-FSS.WebGLRenderer.prototype.setBufferData = function (index, buffer, value) {
+FSS.WebGLRenderer.prototype.setBufferData = function(index, buffer, value) {
   if (FSS.Utils.isNumber(value)) {
-    buffer.data[index * buffer.size] = value;
+    buffer.data[index*buffer.size] = value;
   } else {
     for (var i = value.length - 1; i >= 0; i--) {
-      buffer.data[index * buffer.size + i] = value[i];
+      buffer.data[index*buffer.size+i] = value[i];
     }
   }
 };
@@ -1188,7 +1152,7 @@ FSS.WebGLRenderer.prototype.setBufferData = function (index, buffer, value) {
  * Concepts taken from three.js WebGLRenderer
  * @see https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js
  */
-FSS.WebGLRenderer.prototype.buildProgram = function (lights) {
+FSS.WebGLRenderer.prototype.buildProgram = function(lights) {
   if (this.unsupported) return;
 
   // Create shader source
@@ -1215,7 +1179,7 @@ FSS.WebGLRenderer.prototype.buildProgram = function (lights) {
   if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
     var error = this.gl.getError();
     var status = this.gl.getProgramParameter(program, this.gl.VALIDATE_STATUS);
-    console.error('Could not initialise shader.\nVALIDATE_STATUS: ' + status + '\nERROR: ' + error);
+    console.error('Could not initialise shader.\nVALIDATE_STATUS: '+status+'\nERROR: '+error);
     return null;
   }
 
@@ -1228,20 +1192,20 @@ FSS.WebGLRenderer.prototype.buildProgram = function (lights) {
 
   // Add the program attributes
   program.attributes = {
-    side: this.buildBuffer(program, 'attribute', 'aSide', 1, 'f'),
+    side:     this.buildBuffer(program, 'attribute', 'aSide',     1, 'f' ),
     position: this.buildBuffer(program, 'attribute', 'aPosition', 3, 'v3'),
     centroid: this.buildBuffer(program, 'attribute', 'aCentroid', 3, 'v3'),
-    normal: this.buildBuffer(program, 'attribute', 'aNormal', 3, 'v3'),
-    ambient: this.buildBuffer(program, 'attribute', 'aAmbient', 4, 'v4'),
-    diffuse: this.buildBuffer(program, 'attribute', 'aDiffuse', 4, 'v4')
+    normal:   this.buildBuffer(program, 'attribute', 'aNormal',   3, 'v3'),
+    ambient:  this.buildBuffer(program, 'attribute', 'aAmbient',  4, 'v4'),
+    diffuse:  this.buildBuffer(program, 'attribute', 'aDiffuse',  4, 'v4')
   };
 
   // Add the program uniforms
   program.uniforms = {
-    resolution: this.buildBuffer(program, 'uniform', 'uResolution', 3, '3f', 1),
+    resolution:    this.buildBuffer(program, 'uniform', 'uResolution',    3, '3f',  1     ),
     lightPosition: this.buildBuffer(program, 'uniform', 'uLightPosition', 3, '3fv', lights),
-    lightAmbient: this.buildBuffer(program, 'uniform', 'uLightAmbient', 4, '4fv', lights),
-    lightDiffuse: this.buildBuffer(program, 'uniform', 'uLightDiffuse', 4, '4fv', lights)
+    lightAmbient:  this.buildBuffer(program, 'uniform', 'uLightAmbient',  4, '4fv', lights),
+    lightDiffuse:  this.buildBuffer(program, 'uniform', 'uLightDiffuse',  4, '4fv', lights)
   };
 
   // Set the renderer program
@@ -1254,7 +1218,7 @@ FSS.WebGLRenderer.prototype.buildProgram = function (lights) {
   return program;
 };
 
-FSS.WebGLRenderer.prototype.buildShader = function (type, source) {
+FSS.WebGLRenderer.prototype.buildShader = function(type, source) {
   if (this.unsupported) return;
 
   // Create and compile shader
@@ -1272,8 +1236,8 @@ FSS.WebGLRenderer.prototype.buildShader = function (type, source) {
   return shader;
 };
 
-FSS.WebGLRenderer.prototype.buildBuffer = function (program, type, identifier, size, structure, count) {
-  var buffer = { buffer: this.gl.createBuffer(), size: size, structure: structure, data: null };
+FSS.WebGLRenderer.prototype.buildBuffer = function(program, type, identifier, size, structure, count) {
+  var buffer = {buffer:this.gl.createBuffer(), size:size, structure:structure, data:null};
 
   // Set the location
   switch (type) {
@@ -1287,14 +1251,14 @@ FSS.WebGLRenderer.prototype.buildBuffer = function (program, type, identifier, s
 
   // Create the buffer if count is provided
   if (!!count) {
-    buffer.data = new FSS.Array(count * size);
+    buffer.data = new FSS.Array(count*size);
   }
 
   // Return the buffer
   return buffer;
 };
 
-FSS.WebGLRenderer.VS = function (lights) {
+FSS.WebGLRenderer.VS = function(lights) {
   var shader = [
 
   // Precision
@@ -1304,10 +1268,18 @@ FSS.WebGLRenderer.VS = function (lights) {
   '#define LIGHTS ' + lights,
 
   // Attributes
-  'attribute float aSide;', 'attribute vec3 aPosition;', 'attribute vec3 aCentroid;', 'attribute vec3 aNormal;', 'attribute vec4 aAmbient;', 'attribute vec4 aDiffuse;',
+  'attribute float aSide;',
+  'attribute vec3 aPosition;',
+  'attribute vec3 aCentroid;',
+  'attribute vec3 aNormal;',
+  'attribute vec4 aAmbient;',
+  'attribute vec4 aDiffuse;',
 
   // Uniforms
-  'uniform vec3 uResolution;', 'uniform vec3 uLightPosition[LIGHTS];', 'uniform vec4 uLightAmbient[LIGHTS];', 'uniform vec4 uLightDiffuse[LIGHTS];',
+  'uniform vec3 uResolution;',
+  'uniform vec3 uLightPosition[LIGHTS];',
+  'uniform vec4 uLightAmbient[LIGHTS];',
+  'uniform vec4 uLightDiffuse[LIGHTS];',
 
   // Varyings
   'varying vec4 vColor;',
@@ -1315,36 +1287,50 @@ FSS.WebGLRenderer.VS = function (lights) {
   // Main
   'void main() {',
 
-  // Create color
-  'vColor = vec4(0.0);',
+    // Create color
+    'vColor = vec4(0.0);',
 
-  // Calculate the vertex position
-  'vec3 position = aPosition / uResolution * 2.0;',
+    // Calculate the vertex position
+    'vec3 position = aPosition / uResolution * 2.0;',
 
-  // Iterate through lights
-  'for (int i = 0; i < LIGHTS; i++) {', 'vec3 lightPosition = uLightPosition[i];', 'vec4 lightAmbient = uLightAmbient[i];', 'vec4 lightDiffuse = uLightDiffuse[i];',
+    // Iterate through lights
+    'for (int i = 0; i < LIGHTS; i++) {',
+      'vec3 lightPosition = uLightPosition[i];',
+      'vec4 lightAmbient = uLightAmbient[i];',
+      'vec4 lightDiffuse = uLightDiffuse[i];',
 
-  // Calculate illuminance
-  'vec3 ray = normalize(lightPosition - aCentroid);', 'float illuminance = dot(aNormal, ray);', 'if (aSide == 0.0) {', 'illuminance = max(illuminance, 0.0);', '} else if (aSide == 1.0) {', 'illuminance = abs(min(illuminance, 0.0));', '} else if (aSide == 2.0) {', 'illuminance = max(abs(illuminance), 0.0);', '}',
+      // Calculate illuminance
+      'vec3 ray = normalize(lightPosition - aCentroid);',
+      'float illuminance = dot(aNormal, ray);',
+      'if (aSide == 0.0) {',
+        'illuminance = max(illuminance, 0.0);',
+      '} else if (aSide == 1.0) {',
+        'illuminance = abs(min(illuminance, 0.0));',
+      '} else if (aSide == 2.0) {',
+        'illuminance = max(abs(illuminance), 0.0);',
+      '}',
 
-  // Calculate ambient light
-  'vColor += aAmbient * lightAmbient;',
+      // Calculate ambient light
+      'vColor += aAmbient * lightAmbient;',
 
-  // Calculate diffuse light
-  'vColor += aDiffuse * lightDiffuse * illuminance;', '}',
+      // Calculate diffuse light
+      'vColor += aDiffuse * lightDiffuse * illuminance;',
+    '}',
 
-  // Clamp color
-  'vColor = clamp(vColor, 0.0, 1.0);',
+    // Clamp color
+    'vColor = clamp(vColor, 0.0, 1.0);',
 
-  // Set gl_Position
-  'gl_Position = vec4(position, 1.0);', '}'
+    // Set gl_Position
+    'gl_Position = vec4(position, 1.0);',
+
+  '}'
 
   // Return the shader
   ].join('\n');
   return shader;
 };
 
-FSS.WebGLRenderer.FS = function (lights) {
+FSS.WebGLRenderer.FS = function(lights) {
   var shader = [
 
   // Precision
@@ -1356,8 +1342,10 @@ FSS.WebGLRenderer.FS = function (lights) {
   // Main
   'void main() {',
 
-  // Set gl_FragColor
-  'gl_FragColor = vColor;', '}'
+    // Set gl_FragColor
+    'gl_FragColor = vColor;',
+
+  '}'
 
   // Return the shader
   ].join('\n');
@@ -1368,7 +1356,7 @@ FSS.WebGLRenderer.FS = function (lights) {
  * @class SVG Renderer
  * @author Matthew Wagerfield
  */
-FSS.SVGRenderer = function () {
+FSS.SVGRenderer = function() {
   FSS.Renderer.call(this);
   this.element = document.createElementNS(FSS.SVGNS, 'svg');
   this.element.setAttribute('xmlns', FSS.SVGNS);
@@ -1379,14 +1367,14 @@ FSS.SVGRenderer = function () {
 
 FSS.SVGRenderer.prototype = Object.create(FSS.Renderer.prototype);
 
-FSS.SVGRenderer.prototype.setSize = function (width, height) {
+FSS.SVGRenderer.prototype.setSize = function(width, height) {
   FSS.Renderer.prototype.setSize.call(this, width, height);
   this.element.setAttribute('width', width);
   this.element.setAttribute('height', height);
   return this;
 };
 
-FSS.SVGRenderer.prototype.clear = function () {
+FSS.SVGRenderer.prototype.clear = function() {
   FSS.Renderer.prototype.clear.call(this);
   for (var i = this.element.childNodes.length - 1; i >= 0; i--) {
     this.element.removeChild(this.element.childNodes[i]);
@@ -1394,9 +1382,9 @@ FSS.SVGRenderer.prototype.clear = function () {
   return this;
 };
 
-FSS.SVGRenderer.prototype.render = function (scene) {
+FSS.SVGRenderer.prototype.render = function(scene) {
   FSS.Renderer.prototype.render.call(this, scene);
-  var m, mesh, t, triangle, points, style;
+  var m,mesh, t,triangle, points, style;
 
   // Update Meshes
   for (m = scene.meshes.length - 1; m >= 0; m--) {
@@ -1410,8 +1398,8 @@ FSS.SVGRenderer.prototype.render = function (scene) {
         if (triangle.polygon.parentNode !== this.element) {
           this.element.appendChild(triangle.polygon);
         }
-        points = this.formatPoint(triangle.a) + ' ';
-        points += this.formatPoint(triangle.b) + ' ';
+        points  = this.formatPoint(triangle.a)+' ';
+        points += this.formatPoint(triangle.b)+' ';
         points += this.formatPoint(triangle.c);
         style = this.formatStyle(triangle.color.format());
         triangle.polygon.setAttributeNS(null, 'points', points);
@@ -1422,17 +1410,20 @@ FSS.SVGRenderer.prototype.render = function (scene) {
   return this;
 };
 
-FSS.SVGRenderer.prototype.formatPoint = function (vertex) {
-  return this.halfWidth + vertex.position[0] + ',' + (this.halfHeight - vertex.position[1]);
+FSS.SVGRenderer.prototype.formatPoint = function(vertex) {
+  return (this.halfWidth+vertex.position[0])+','+(this.halfHeight-vertex.position[1]);
 };
 
-FSS.SVGRenderer.prototype.formatStyle = function (color) {
-  var style = 'fill:' + color + ';';
-  style += 'stroke:' + color + ';';
+FSS.SVGRenderer.prototype.formatStyle = function(color) {
+  var style = 'fill:'+color+';';
+  style += 'stroke:'+color+';';
   return style;
 };
 
-(function () {
+
+
+
+(function(){
 
   //------------------------------
   // Mesh Properties
@@ -1452,16 +1443,16 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
   //------------------------------
   var LIGHT = {
     count: 0,
-    xPos: 68,
-    yPos: 440,
+    xPos : 68,
+    yPos : 440,
     zOffset: 55,
     ambient: '#5838e6',
-    diffuse: '#4efa62',
-    pickedup: true,
-    proxy: false,
-    currIndex: 0,
-    randomize: function randomize() {
-      var x, y, z;
+    diffuse: '#4efa62',    
+    pickedup :true,
+    proxy : false,
+    currIndex : 0,
+    randomize : function(){
+      var x,y,z;
       var decider = Math.floor(Math.random() * 3) + 1;
 
       if (decider == 1) MESH.depth = 0;
@@ -1471,26 +1462,27 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
       MESH.depth = 0;
 
       for (l = scene.lights.length - 1; l >= 0; l--) {
-        x = Math.randomInRange(-mesh.geometry.width / 2, mesh.geometry.width / 2);
-        y = Math.randomInRange(-mesh.geometry.height / 2, mesh.geometry.height / 2);
-        if (scene.lights.length > 2) z = Math.randomInRange(10, 80);else z = Math.randomInRange(10, 100);
+        x = Math.randomInRange(-mesh.geometry.width/2, mesh.geometry.width/2);
+        y = Math.randomInRange(-mesh.geometry.height/2, mesh.geometry.height/2);
+        if(scene.lights.length > 2) z = Math.randomInRange(10, 80);
+        else z = Math.randomInRange(10, 100);
 
         light = scene.lights[l];
         FSS.Vector3.set(light.position, x, y, z);
 
-        //var diffuse = getRandomColor();
+         //var diffuse = getRandomColor();
         var diffuse = this.diffuse;
         //var ambient = getRandomColor();
         var ambient = this.ambient;
 
-        // light.diffuse.set(diffuse);
+       // light.diffuse.set(diffuse);
         light.diffuseHex = light.diffuse.format();
 
         //light.ambient.set(ambient);
         light.ambientHex = light.ambient.format();
 
-        LIGHT.xPos = x;
-        LIGHT.yPos = y;
+        LIGHT.xPos    = x;
+        LIGHT.yPos    = y;
         LIGHT.zOffset = z;
         LIGHT.diffuse = diffuse;
         LIGHT.ambient = ambient;
@@ -1519,8 +1511,8 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
     width: 2000,
     height: 1000,
 
-    exportCurrent: function exportCurrent() {
-      switch (RENDER.renderer) {
+    exportCurrent: function(){
+      switch(RENDER.renderer) {
         case WEBGL:
           window.open(webglRenderer.element.toDataURL(), '_blank');
           break;
@@ -1534,18 +1526,15 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
           break;
       }
     },
-    export: function _export() {
-      var l,
-          x,
-          y,
-          light,
-          scalarX = this.width / renderer.width,
-          scalarY = this.height / renderer.height;
+    export: function() {
+      var l, x, y, light,
+        scalarX = this.width / renderer.width,
+        scalarY = this.height / renderer.height;
 
       // store a temp value of the slices
       var slices = MESH.slices;
       // Increase or decrease number of slices depending on the size of the canvas
-      MESH.slices = Math.ceil(slices * scalarX * 1.4);
+      MESH.slices = Math.ceil(slices*scalarX*1.4);
 
       // Regenerate the whole canvas
       resize(this.width, this.height);
@@ -1559,7 +1548,7 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
         x = light.position[0];
         y = light.position[1];
         z = light.position[2];
-        FSS.Vector3.set(light.position, x * scalarX, y * scalarY, z * scalarX);
+        FSS.Vector3.set(light.position, x*scalarX, y*scalarY, z*scalarX);
       }
 
       // Update depth of the triangles
@@ -1567,7 +1556,7 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
       // Render the canvas
       render();
 
-      switch (RENDER.renderer) {
+      switch(RENDER.renderer) {
         case WEBGL:
           window.open(webglRenderer.element.toDataURL(), '_blank');
           break;
@@ -1588,10 +1577,11 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
         x = light.position[0];
         y = light.position[1];
         z = light.position[2];
-        FSS.Vector3.set(light.position, x / scalarX, y / scalarY, z / scalarX);
+        FSS.Vector3.set(light.position, x/scalarX, y/scalarY, z/scalarX);
       }
     }
   };
+
 
   //------------------------------
   // Global Properties
@@ -1630,7 +1620,7 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
     if (renderer) {
       output.removeChild(renderer.element);
     }
-    switch (index) {
+    switch(index) {
       case WEBGL:
         renderer = webglRenderer;
         break;
@@ -1664,7 +1654,7 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
     var v, vertex;
     for (v = geometry.vertices.length - 1; v >= 0; v--) {
       vertex = geometry.vertices[v];
-      vertex.depth = Math.randomInRange(0, MESH.maxdepth / 10);
+      vertex.depth = Math.randomInRange(0, MESH.maxdepth/10);
       vertex.anchor = FSS.Vector3.clone(vertex.position);
     }
   }
@@ -1690,8 +1680,8 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
   }
 
   function addLights() {
-    addLight();
-    LIGHT.count++;
+      addLight();
+      LIGHT.count++;
   }
 
   // Remove lights
@@ -1701,7 +1691,7 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
       scene.remove(light);
       LIGHT.currIndex--;
     }
-    LIGHT.proxy = scene.lights[LIGHT.currIndex - 1];
+    LIGHT.proxy = scene.lights[LIGHT.currIndex-1];
     LIGHT.pickedup = false;
 
     renderer.clear();
@@ -1721,14 +1711,12 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
   }
 
   function update() {
-    var v,
-        vertex,
-        offset = MESH.depth / 100;
+    var v, vertex, offset = MESH.depth/100;
 
     // Add depth to Vertices
     for (v = geometry.vertices.length - 1; v >= 0; v--) {
       vertex = geometry.vertices[v];
-      FSS.Vector3.set(vertex.position, 1, 1, vertex.depth * offset);
+      FSS.Vector3.set(vertex.position, 1, 1, vertex.depth*offset);
       FSS.Vector3.add(vertex.position, vertex.anchor);
     }
 
@@ -1749,7 +1737,7 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
     var i, l, light, folder, controller;
 
     // Create GUI
-    gui = new dat.GUI({ autoPlace: false });
+    gui = new dat.GUI({autoPlace:false});
 
     controls.appendChild(gui.domElement);
 
@@ -1763,55 +1751,49 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
     lightFolder.open();
 
     // Add Render Controls
-    controller = renderFolder.add(RENDER, 'renderer', { webgl: WEBGL, canvas: CANVAS, svg: SVG });
-    controller.onChange(function (value) {
+    controller = renderFolder.add(RENDER, 'renderer', {webgl:WEBGL, canvas:CANVAS, svg:SVG});
+    controller.onChange(function(value) {
       setRenderer(value);
     });
 
     // Add Mesh Controls
     controller = meshFolder.addColor(MESH, 'ambient');
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       for (i = 0, l = scene.meshes.length; i < l; i++) {
         scene.meshes[i].material.ambient.set(value);
       }
     });
     controller = meshFolder.addColor(MESH, 'diffuse');
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       for (i = 0, l = scene.meshes.length; i < l; i++) {
         scene.meshes[i].material.diffuse.set(value);
       }
     });
     controller = meshFolder.add(MESH, 'width', 0.05, 2);
-    controller.onChange(function (value) {
-      if (geometry.width !== value * renderer.width) {
-        createMesh();
-      }
+    controller.onChange(function(value) {
+      if (geometry.width !== value * renderer.width) { createMesh(); }
     });
     controller = meshFolder.add(MESH, 'height', 0.05, 2);
-    controller.onChange(function (value) {
-      if (geometry.height !== value * renderer.height) {
-        createMesh();
-      }
+    controller.onChange(function(value) {
+      if (geometry.height !== value * renderer.height) { createMesh(); }
     });
 
     controller = meshFolder.add(MESH, 'depth', 0, MESH.maxdepth).listen();
 
     controller = meshFolder.add(MESH, 'slices', 1, 800);
     controller.step(1);
-    controller.onChange(function (value) {
-      if (geometry.slices !== value) {
-        createMesh();
-      }
+    controller.onChange(function(value) {
+      if (geometry.slices !== value) { createMesh(); }
     });
 
-    controller = lightFolder.add(LIGHT, 'currIndex', { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7 }).name('Current light').listen();
-    controller.onChange(function (value) {
-      LIGHT.proxy = scene.lights[value - 1];
+    controller = lightFolder.add(LIGHT, 'currIndex', {1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7}).name('Current light').listen();
+    controller.onChange(function(value) {
+      LIGHT.proxy = scene.lights[value-1];
 
       LIGHT.ambient = LIGHT.proxy.ambient.hex;
       LIGHT.diffuse = LIGHT.proxy.diffuse.hex;
-      LIGHT.xPos = LIGHT.proxy.position[0];
-      LIGHT.yPos = LIGHT.proxy.position[1];
+      LIGHT.xPos    = LIGHT.proxy.position[0];
+      LIGHT.yPos    = LIGHT.proxy.position[1];
       LIGHT.zOffset = LIGHT.proxy.position[2];
 
       gui.__folders.Light.__controllers[1].updateDisplay();
@@ -1819,20 +1801,20 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
     });
 
     controller = lightFolder.addColor(LIGHT, 'ambient');
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       LIGHT.proxy.ambient.set(value);
-      LIGHT.proxy.ambientHex = LIGHT.proxy.ambient.format();
+      LIGHT.proxy.ambientHex =  LIGHT.proxy.ambient.format();
     });
 
     controller = lightFolder.addColor(LIGHT, 'diffuse');
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       LIGHT.proxy.diffuse.set(value);
       LIGHT.proxy.diffuseHex = LIGHT.proxy.diffuse.format();
     });
 
     controller = lightFolder.add(LIGHT, 'count', 1, 7).listen();
     controller.step(1);
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       if (scene.lights.length !== value) {
         if (value > scene.lights.length) {
           addLight();
@@ -1842,57 +1824,60 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
       }
     });
 
-    controller = lightFolder.add(LIGHT, 'xPos', -mesh.geometry.width / 2, mesh.geometry.width / 2).listen();
+    controller = lightFolder.add(LIGHT, 'xPos', -mesh.geometry.width/2, mesh.geometry.width/2).listen();
     controller.step(1);
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       LIGHT.proxy.setPosition(value, LIGHT.proxy.position[1], LIGHT.proxy.position[2]);
     });
 
-    controller = lightFolder.add(LIGHT, 'yPos', -mesh.geometry.height / 2, mesh.geometry.height / 2).listen();
+    controller = lightFolder.add(LIGHT, 'yPos', -mesh.geometry.height/2, mesh.geometry.height/2).listen();
     controller.step(1);
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       LIGHT.proxy.setPosition(LIGHT.proxy.position[0], value, LIGHT.proxy.position[2]);
     });
 
+
+
+
     controller = lightFolder.add(LIGHT, 'zOffset', 0, 1000).name('Distance').listen();
-    scrollButtonDistance = Number(LIGHT.proxy.position[2]);
-    //Firefox
-    $('#container').bind('DOMMouseScroll', function (e) {
-      if (e.originalEvent.detail > 0) {
-        scrollButtonDistance = Number(Math.max(0, scrollButtonDistance - e.detail / 4));
-      } else {
-        scrollButtonDistance = Number(Math.min(1000, scrollButtonDistance - e.detail / 4));
-      }
+	scrollButtonDistance = Number(LIGHT.proxy.position[2]);
+	//Firefox
+	$('#container').bind('DOMMouseScroll', function(e) {
+		if(e.originalEvent.detail > 0) {
+		 scrollButtonDistance = Number(Math.max(0, scrollButtonDistance - e.detail/4));
+		} else {
+		 scrollButtonDistance =  Number(Math.min(1000, scrollButtonDistance - e.detail/4));
+		}
 
-      LIGHT.proxy.setPosition(LIGHT.proxy.position[0], LIGHT.proxy.position[1], scrollButtonDistance);
-      LIGHT.zOffset = scrollButtonDistance;
-      LIGHT.z = scrollButtonDistance;
-      gui.__folders.Light.__controllers[1].updateDisplay();
-      gui.__folders.Light.__controllers[2].updateDisplay();
-      return false;
-    });
+		LIGHT.proxy.setPosition(LIGHT.proxy.position[0], LIGHT.proxy.position[1], scrollButtonDistance);
+		 LIGHT.zOffset = scrollButtonDistance;
+		LIGHT.z = scrollButtonDistance;
+		gui.__folders.Light.__controllers[1].updateDisplay();
+		gui.__folders.Light.__controllers[2].updateDisplay();
+		return false;
+	});
 
-    //IE, Opera, Safari
-    $('#container').bind('mousewheel', function (e) {
-      if (e.originalEvent.wheelDelta < 0) {
-        scrollButtonDistance = Number(Math.max(0, scrollButtonDistance + e.originalEvent.wheelDelta / 4));
-      } else {
-        scrollButtonDistance = Number(Math.min(1000, scrollButtonDistance + e.originalEvent.wheelDelta / 4));
-      }
+	//IE, Opera, Safari
+	$('#container').bind('mousewheel', function(e) {
+		if(e.originalEvent.wheelDelta < 0) {
+		 scrollButtonDistance =  Number(Math.max(0, scrollButtonDistance + e.originalEvent.wheelDelta/4));
+		} else {
+		 scrollButtonDistance = Number(Math.min(1000, scrollButtonDistance + e.originalEvent.wheelDelta/4));
+		}
 
-      LIGHT.proxy.setPosition(Number(LIGHT.proxy.position[0]), Number(LIGHT.proxy.position[1]), scrollButtonDistance);
-      LIGHT.zOffset = scrollButtonDistance;
-      LIGHT.z = scrollButtonDistance;
-      gui.__folders.Light.__controllers[1].updateDisplay();
-      gui.__folders.Light.__controllers[2].updateDisplay();
+		LIGHT.proxy.setPosition(Number(LIGHT.proxy.position[0]), Number(LIGHT.proxy.position[1]), scrollButtonDistance);
+		LIGHT.zOffset = scrollButtonDistance;
+		LIGHT.z = scrollButtonDistance;
+		gui.__folders.Light.__controllers[1].updateDisplay();
+		gui.__folders.Light.__controllers[2].updateDisplay();
 
-      return false;
-    });
+		return false;
+	});
 
-    /* End JQuery Block */
+	/* End JQuery Block */
 
     controller.step(1);
-    controller.onChange(function (value) {
+    controller.onChange(function(value) {
       LIGHT.proxy.setPosition(LIGHT.proxy.position[0], LIGHT.proxy.position[1], value);
     });
 
@@ -1905,15 +1890,19 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
     controller.step(100);
     controller = exportFolder.add(EXPORT, 'export').name('export big');
     controller = exportFolder.add(EXPORT, 'exportCurrent').name('export this');
+
   }
 
   function toggleEl(id) {
     var e = document.getElementById(id);
-    if (e.style.display == 'block') e.style.display = 'none';else e.style.display = 'block';
+    if(e.style.display == 'block')
+       e.style.display = 'none';
+    else
+       e.style.display = 'block';
   }
 
-  function getRandomColor() {
-    return '#' + (Math.random().toString(16) + '000000').slice(2, 8);
+  function getRandomColor(){
+    return '#'+(Math.random().toString(16) + '000000').slice(2, 8);
   }
 
   //------------------------------
@@ -1926,15 +1915,17 @@ FSS.SVGRenderer.prototype.formatStyle = function (color) {
   }
 
   function onMouseMove(event) {
-    if (LIGHT.pickedup) {
-      LIGHT.xPos = (event.x || event.clientX) - renderer.width / 2;
-      LIGHT.yPos = renderer.height / 2 - (event.y || event.clientY);
+    if(LIGHT.pickedup){
+      LIGHT.xPos = (event.x || event.clientX) - renderer.width/2;
+      LIGHT.yPos = renderer.height/2 - (event.y || event.clientY);
       LIGHT.proxy.setPosition(LIGHT.xPos, LIGHT.yPos, LIGHT.proxy.position[2]);
     }
   }
 
-  LIGHT.pickedup = true;
 
+  LIGHT.pickedup = true;
+  
   // Let there be light!
   initialise();
+
 })();
