@@ -9,6 +9,7 @@
     filterWorks();
     linkClick();
     mobileNav();
+    preloader();
   });
 
   //= partial/resizeMain.js
@@ -18,5 +19,6 @@
   //= partial/filterWorks.js
   //= partial/linkClick.js
   //= partial/mobileNav.js
+  //= partial/preloader.js
 
 })();

@@ -11,6 +11,7 @@
     filterWorks();
     linkClick();
     mobileNav();
+    preloader();
   });
 
   (function resizeMain() {
@@ -203,5 +204,9 @@
     closeBtn.addEventListener('click', function () {
       mobileNav.style.marginLeft = '';
     });
+  }
+  function preloader() {
+    var preload = document.querySelector('.preloader');
+    preload.style.display = 'none';
   }
 })();
