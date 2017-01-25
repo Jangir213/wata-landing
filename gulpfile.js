@@ -10,6 +10,7 @@ var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rigger = require('gulp-rigger');
 var rimraf = require('rimraf');
+var image = require('gulp-image');
 
 //server
 gulp.task('server', function () {
@@ -28,7 +29,7 @@ gulp.task('style', function () {
 		.src('src/sass/**/*.sass')
 		.pipe(wait(1500))
 		.pipe(sass().on('error', sass.logError))
-		.pipe(prefixer()) 
+		.pipe(prefixer())
 		.pipe(gulp.dest('src/css'));
 });
 
@@ -47,7 +48,7 @@ gulp.task('clean', function (c) {
 	rimraf('./build', c);
 });
 
-gulp.task('build-html', function () {
+gulp.task('html-build', function () {
 	gulp
 		.src('src/*.html')
 		.pipe(useref())
@@ -56,6 +57,32 @@ gulp.task('build-html', function () {
 		.pipe(gulp.dest('./build'));
 });
 
+gulp.task('img-build', function () {
+	gulp
+		.src('src/images/**/*.*')
+		.pipe(image())
+		.pipe(gulp.dest('./build/images'));
+});
+
+gulp.task('fonts-build', function () {
+	gulp
+		.src('src/fonts/*.*')
+		.pipe(gulp.dest('./build/fonts'));
+});
+
+gulp.task('favicon-build', function () {
+	gulp
+		.src('src/favicon.ico')
+		.pipe(gulp.dest('./build'));
+});
+
+
+gulp.task('build', [	
+	'html-build',
+	'img-build',
+	'fonts-build',
+	'favicon-build'
+]);
 
 
 // watch
@@ -65,3 +92,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['server', 'watch']);
+
