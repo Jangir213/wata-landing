@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wata</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="css/libs.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+  <!--preloader-->
+  <div class="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__item preloader__item--one"></div>
+      <div class="preloader__item preloader__item--two"></div>
+      <div class="preloader__item preloader__item--three"></div>
+    </div>
+  </div>
+
+  <!--navigation-->
+  <nav class="nav">
+    <a class="nav__logo">Wata</a>
+
+    <ul class="nav__items">
+      <li class="nav__item">
+        <a href="#promo" class="nav__link">Home</a>
+      </li>
+      <li class="nav__item">
+        <a href="#services" class="nav__link">Services</a>
+      </li>
+      <li class="nav__item">
+        <a href="#works" class="nav__link">Works</a>
+      </li>
+      <li class="nav__item">
+        <a href="#about" class="nav__link">About</a>
+      </li>
+      <li class="nav__item">
+        <a href="#prices" class="nav__link">Prices</a>
+      </li>
+      <li class="nav__item">
+        <a href="#subscribe" class="nav__link">Subscribe</a>
+      </li>
+      <li class="nav__item">
+        <a href="#posts" class="nav__link">Blog</a>
+      </li>
+      <li class="nav__item">
+        <a href="#contact" class="nav__link">Contact</a>
+      </li>
+    </ul>
+
+    <!--mobile nav-->
+    <a class="nav__mobile-btn"></a>
+
+    <ul class="nav__mobile-items">
+      <a class="nav__mobile-close">×</a>
+
+      <li class="nav__mobile-item">
+        <a href="#promo" class="nav__mobile-link">Home</a>
+      </li>
+      <li class="nav__mobile-item">
+        <a href="#services" class="nav__mobile-link">Services</a>
+      </li>
+      <li class="nav__mobile-item">
+        <a href="#works" class="nav__mobile-link">Works</a>
+      </li>
+      <li class="nav__mobile-item">
+        <a href="#about" class="nav__mobile-link">About</a>
+      </li>
+      <li class="nav__mobile-item">
+        <a href="#prices" class="nav__mobile-link">Prices</a>
+      </li>
+      <li class="nav__mobile-item">
+        <a href="#subscribe" class="nav__mobile-link">Subscribe</a>
+      </li>
+      <li class="nav__mobile-item">
+        <a href="#posts" class="nav__mobile-link">Blog</a>
+      </li>
+      <li class="nav__mobile-item">
+        <a href="#contact" class="nav__mobile-link">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!--promo-->
+  <header class="promo scrollspy" id="promo">
+    <div class="promo__triangles">
+      <div class="promo__content">
+        <div class="promo__in">
+          <h1 class="promo__title">
+            We work really hard to make your live easier.
+          </h1>
+          <a href="#services" class="promo__btn"></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!--services-->
+  <section class="services scrollspy" id="services">
+
+    <div class="services__in">
+
+      <h2 class="services__title">
+        We are wata
+      </h2>
+
+      <p class="services__description">
+        We're a small local company focused on crafting special and precise products that really help in your everyday life. Feel
+        free to check out our services and explore the gallery of our works.
+      </p>
+
+      <div class="services__items">
+        <div class="services__item service">
+          <i class="service__ico service__ico--brash"></i>
+          <div class="service__line"></div>
+          <h3 class="service__title">Creative design</h3>
+          <p class="service__description">Inspired by the latest trends of Material design, using cutting-edge technologies for a fresh and modern look.
+            More design, all the time.</p>
+          <a class="service__btn link">More</a>
+        </div>
+
+        <div class="services__item service">
+          <i class="service__ico service__ico--desctop"></i>
+          <div class="service__line"></div>
+          <h3 class="service__title">Fits all screens</h3>
+          <p class="service__description">Designed as a mobile-first application, the grid scales to fit even the largest monitors. The content always looks
+            nice and balanced.</p>
+          <a class="service__btn link">Discover</a>
+        </div>
+
+        <div class="services__item service">
+          <i class="service__ico service__ico--cog"></i>
+          <div class="service__line"></div>
+          <h3 class="service__title">Easily adjustable</h3>
+          <p class="service__description">You are welcome to customize the elements to fit your needs. The proccess is simple and pleasant thanks for a Material
+            color palette.</p>
+          <a class="service__btn link">Try it</a>
+        </div>
+
+        <div class="services__item service">
+          <i class="service__ico service__ico--code"></i>
+          <div class="service__line"></div>
+          <h3 class="service__title">Carefully coded</h3>
+          <p class="service__description">Beautiful on the outside and smart on the inside. Our code is clean, extremely readable and no trouble to modify
+            or maintain.</p>
+          <a class="service__btn link">Explore</a>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+  <!--works-->
+  <section class="works scrollspy" id="works">
+
+    <div class="works__in">
+      <h2 class="works__title">
+        Our works
+      </h2>
+
+      <ul class="works__filter filter">
+        <li class="filter__btn link filter__btn--active" data-group="all">Everything</li>
+        <li class="filter__btn link" data-group="material">Material</li>
+        <li class="filter__btn link" data-group="food">Food</li>
+        <li class="filter__btn link" data-group="digital">Digital</li>
+      </ul>
+    </div>
+
+    <div class="works__items">
+      <a href="#" class="works__item work" data-groups='["food"]'>
+        <img src="images/works/ice-cream.png" alt="clock" class="work__img">
+        <h4 class="work__title">Heisenberg ice-cream</h4>
+      </a>
+      <a href="#" class="works__item work" data-groups='["material"]'>
+        <img src="images/works/books.png" alt="clock" class="work__img">
+        <h4 class="work__title">A. Joe book cover</h4>
+      </a>
+      <a href="#" class="works__item work" data-groups='["digital"]'>
+        <img src="images/works/clock.png" alt="clock" class="work__img">
+        <h4 class="work__title">Wooden series</h4>
+      </a>
+      <a href="#" class="works__item work" data-groups='["digital", "material"]'>
+        <img src="images/works/rubiks.png" alt="clock" class="work__img">
+        <h4 class="work__title">Rubik's triangle</h4>
+      </a>
+      <a href="#" class="works__item work" data-groups='["material"]'>
+        <img src="images/works/tape.png" alt="clock" class="work__img">
+        <h4 class="work__title">Old fashioned</h4>
+      </a>
+      <a href="#" class="works__item work" data-groups='["food", "material"]'>
+        <img src="images/works/trees.png" alt="clock" class="work__img">
+        <h4 class="work__title">Parks and recreation</h4>
+      </a>
+    </div>
+
+  </section>
+
+  <!--started-->
+  <section class="started">
+    <div class="started__in">
+      <h2 class="started__title">
+        Like what you see?
+      </h2>
+
+      <p class="started__description">
+        Let's start building your next project together. View our bundle <a href="#prices">prices</a> or get started right
+        away.
+      </p>
+
+      <a class="started__btn link">      
+      Get started
+       </a>
+    </div>
+  </section>
+
+  <!--about-->
+  <section class="about scrollspy" id="about">
+
+    <div class="about__in">
+
+      <h2 class="about__title">
+        The studio
+      </h2>
+
+      <p class="about__description">
+        Meet the superheroes, the most dedicated team to ever walk the land of the web. We're always available to suit your needs.
+      </p>
+
+    </div>
+
+
+    <div class="about__persons">
+
+      <!--person-->
+      <div class="about__person person">
+        <div class="person__bg"></div>
+
+        <div class="person__info">
+          <span class="person__name">Ann Perkins</span>
+          <span class="person__proffesion">Art director and founder</span>
+
+          <div class="person__contacts">
+            <a href="#" class="person__tel">+38(063)123-45-67</a>
+            <a href="#" class="person__email">ann@wata.com</a>
+            <div class="person__socials">
+              <a href="#" class="person__social person__social--fb"></a>
+              <a href="#" class="person__social person__social--bh"></a>
+              <a href="#" class="person__social person__social--dv"></a>
+              <a href="#" class="person__social person__social--gp"></a>
+            </div>
+          </div>
+        </div>
+
+        <img src="images/persons/1.jpg" alt="person" class="person__img">
+      </div>
+      <!--end person-->
+      <!--person-->
+      <div class="about__person person">
+        <div class="person__bg"></div>
+
+        <div class="person__info">
+          <span class="person__name">John Cleverley</span>
+          <span class="person__proffesion">Senior developer</span>
+
+          <div class="person__contacts">
+            <a href="#" class="person__tel">+38(063)123-45-67</a>
+            <a href="#" class="person__email">john@wata.com</a>
+            <div class="person__socials">
+              <a href="#" class="person__social person__social--vk"></a>
+              <a href="#" class="person__social person__social--gh"></a>
+              <a href="#" class="person__social person__social--bb"></a>
+              <a href="#" class="person__social person__social--tb"></a>
+            </div>
+          </div>
+        </div>
+
+        <img src="images/persons/2.jpg" alt="person" class="person__img">
+      </div>
+      <!--end person-->
+      <!--person-->
+      <div class="about__person person">
+        <div class="person__bg"></div>
+
+        <div class="person__info">
+          <span class="person__name">Jonathan Edgar</span>
+          <span class="person__proffesion">System administrator</span>
+
+          <div class="person__contacts">
+            <a href="#" class="person__tel">+38(063)123-45-67</a>
+            <a href="#" class="person__email">jonathan@wata.com</a>
+            <div class="person__socials">
+              <a href="#" class="person__social person__social--fb"></a>
+              <a href="#" class="person__social person__social--gh"></a>
+              <a href="#" class="person__social person__social--bb"></a>
+              <a href="#" class="person__social person__social--of"></a>
+            </div>
+          </div>
+        </div>
+
+        <img src="images/persons/3.jpg" alt="person" class="person__img">
+      </div>
+      <!--end person-->
+      <!--person-->
+      <div class="about__person person">
+        <div class="person__bg"></div>
+
+        <div class="person__info">
+          <span class="person__name">Eva Green</span>
+          <span class="person__proffesion">UI/UX designer</span>
+
+          <div class="person__contacts">
+            <a href="#" class="person__tel">+38(063)123-45-67</a>
+            <a href="#" class="person__email">eva@wata.com</a>
+            <div class="person__socials">
+              <a href="#" class="person__social person__social--fb"></a>
+              <a href="#" class="person__social person__social--bh"></a>
+              <a href="#" class="person__social person__social--dv"></a>
+              <a href="#" class="person__social person__social--pr"></a>
+            </div>
+          </div>
+        </div>
+
+        <img src="images/persons/4.jpg" alt="person" class="person__img">
+      </div>
+      <!--end person-->
+
+    </div>
+
+  </section>
+
+  <!--prices-->
+  <section class="prices scrollspy" id="prices">
+
+    <div class="prices__in">
+
+      <h2 class="prices__title">
+        Prices
+      </h2>
+
+      <p class="prices__description">
+        Browse between a standard, professional and extended bundle versions. We've got your next project covered.
+      </p>
+
+      <div class="prices__currency currency">
+        <span class="currency__description">Choose your currency:</span>
+
+        <div class="currency__group">
+          <input type="radio" name="currency" class="currency__inpt" id="dol" checked>
+          <label for="dol" class="currency__lbl">$</label>
+        </div>
+
+        <div class="currency__group">
+          <input type="radio" name="currency" class="currency__inpt" id="eur">
+          <label for="eur" class="currency__lbl">€</label>
+        </div>
+      </div>
+
+      <div class="prices__containers">
+
+        <div class="prices__container container container--standard">
+          <h4 class="container__title">
+            Standart
+          </h4>
+          <div class="container__line"></div>
+          <div class="container__price">$19</div>
+          <ul class="container__services">
+            <li class="container__service">Mobile support</li>
+            <li class="container__service">Site optimization</li>
+            <li class="container__service">SEO setup</li>
+            <li class="container__service">Subscribers</li>
+            <li class="container__service">Support tickets</li>
+          </ul>
+          <a class="container__btn link">Choose</a>
+        </div>
+
+        <div class="prices__container container container--professional">
+          <h4 class="container__title">
+            Professional
+          </h4>
+          <div class="container__line"></div>
+          <div class="container__price">$49</div>
+          <ul class="container__services">
+            <li class="container__service">Mobile support</li>
+            <li class="container__service">Site optimization</li>
+            <li class="container__service">SEO setup</li>
+            <li class="container__service">Subscribers</li>
+            <li class="container__service">PHP integration</li>
+            <li class="container__service">Unlimited support</li>
+          </ul>
+          <a class="container__btn link container__btn--blue">Choose</a>
+        </div>
+
+        <div class="prices__container container container--extend">
+          <h4 class="container__title">
+            Extend
+          </h4>
+          <div class="container__line"></div>
+          <div class="container__price">$99</div>
+          <ul class="container__services">
+            <li class="container__service">Mobile support</li>
+            <li class="container__service">Site optimization</li>
+            <li class="container__service">SEO setup</li>
+            <li class="container__service">MailChimp Subscribers</li>
+            <li class="container__service">WebGL effects</li>
+            <li class="container__service">PHP integration</li>
+            <li class="container__service">Unlimited support</li>
+          </ul>
+          <a class="container__btn link">Choose</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--subscribe-->
+  <section class="subscribe scrollspy" id="subscribe">
+    <div class="subscribe__in">
+      <h2 class="subscribe__title">
+        Subscribe
+      </h2>
+
+      <p class="subscribe__description">
+        Don't miss our offers and receive some pro tips. We promise we won't spam you, unsubscribe anytime you want.
+      </p>
+
+
+      <form action="#" class="subscribe__form">
+
+        <div class="subscribe__group">
+          <label for="sub-mail" class="subscribe__lbl lbl">Your email</label>
+          <input type="email" class="subscribe__input" id="sub-mail" required>
+        </div>
+
+        <a class="subscribe__btn link">Subscribe</a>
+      </form>
+    </div>
+  </section>
+
+  <!--posts-->
+  <section class="posts scrollspy" id="posts">
+
+    <div class="posts__in">
+      <h2 class="posts__title">
+        Latest blog posts
+      </h2>
+      <p class="posts__description">
+        Want to get a little more personal? Read our stories, meet the team and get a preview of the future products. All this and
+        more in our blog.
+      </p>
+    </div>
+
+    <div class="posts__items">
+
+      <div class="posts__left-col">
+
+        <div class="posts__item post">
+          <a href="#" class="post__link">
+            <img src="images/posts/building.jpg" alt="building" class="post__img">
+            <span class="post__btn"></span>
+          </a>
+        </div>
+
+        <div class="posts__item post">
+          <a href="#" class="post__link">
+            <img src="images/posts/yoga.jpg" alt="yoga" class="post__img">
+            <span class="post__btn"></span>
+          </a>
+        </div>
+
+        <div class="posts__item post">
+          <a href="#" class="post__link">
+            <img src="images/posts/paper.jpg" alt="paper" class="post__img">
+            <span class="post__btn"></span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="posts__right-col">
+
+        <div class="posts__item posts__item--wide post">
+          <a href="#" class="post__link">
+            <img src="images/posts/bottles.jpg" alt="bottles" class="post__img">
+            <span class="post__btn"></span>
+          </a>
+        </div>
+
+        <div class="posts__item post">
+          <a href="#" class="post__link">
+            <img src="images/posts/coffee.jpg" alt="coffee" class="post__img">
+            <span class="post__btn"></span>
+          </a>
+        </div>
+
+        <div class="posts__item post">
+          <a href="#" class="post__link">
+            <img src="images/posts/drone.jpg" alt="drone" class="post__img">
+            <span class="post__btn"></span>
+          </a>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </section>
+
+  <!--contact-->
+  <section class="contact scrollspy" id="contact">
+    <div class="contact__in">
+      <h2 class="contact__title">
+        Contact us
+      </h2>
+      <p class="contact__description">
+        Let us know if you want to work on your project with us or just drop a line to say hello. We're always glad to receive your
+        messages.
+      </p>
+
+      <form action="#" class="contact__form">
+        <div class="contact__group contact__group--half">
+          <label for="con-name" class="contact__lbl lbl">Name</label>
+          <input type="text" class="contact__input" id="con-mail" required>
+        </div>
+
+        <div class="contact__group contact__group--half">
+          <label for="con-surname" class="contact__lbl lbl">Surname</label>
+          <input type="text" class="contact__input" id="con-surname" required>
+        </div>
+
+        <div class="contact__group">
+          <label for="con-mail" class="contact__lbl lbl">Email</label>
+          <input type="email" class="contact__input" id="con-mail" required>
+        </div>
+
+        <div class="contact__group">
+          <label for="con-msg" class="contact__lbl contact__lbl--msg lbl">Message</label>
+          <textarea type="email" class="contact__input contact__input--msg" id="con-msg" required></textarea>
+        </div>
+
+        <a class="contact__btn link">Send</a>
+      </form>
+    </div>
+
+    <div class="contact__map"></div>
+
+    <div class="contact__in contact__in--row">
+      <div class="contact__col">
+        <h4 class="contact__info">Headquarters</h4>
+        <div class="contact__line"></div>
+        <span class="contact__detail">Polytechnic str. 41</span>
+        <span class="contact__detail">03056 Kyiv</span>
+        <span class="contact__detail">Ukraine</span>
+      </div>
+
+      <div class="contact__col">
+        <h4 class="contact__info">Reach us</h4>
+        <div class="contact__line"></div>
+        <span class="contact__detail">+38-044-123-45-67</span>
+        <span class="contact__detail">hello@wata.com</span>
+      </div>
+
+      <div class="contact__col">
+        <h4 class="contact__info">Connect</h4>
+        <div class="contact__line"></div>
+        <span class="contact__detail contact__detail--sk">wata.skype</span>
+        <span class="contact__detail contact__detail--ws">wata.whatsapp</span>
+        <span class="contact__detail contact__detail--wc">wata.wechat</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!--footer-->
+  <footer class="footer">
+    <div class="footer__in">
+      <div class="footer__copy">© 2017 Wata</div>
+      <div class="footer__socials">
+        <a href="#" class="footer__social footer__social--fb"></a>
+        <a href="#" class="footer__social footer__social--vk"></a>
+        <a href="#" class="footer__social footer__social--gp"></a>
+        <a href="#" class="footer__social footer__social--gh"></a>
+        <a href="#" class="footer__social footer__social--dv"></a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--scripts-->
+  <script src="js/libs.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/triangles.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzqQVt58T10AKw8Ye5s4vcNE00FNwHVdk&callback=googleMap"></script>
+</body>
+
+</html>
